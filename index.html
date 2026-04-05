@@ -1,0 +1,180 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Your App Name</title>
+  <meta name="description" content="A simple app website for Your App Name.">
+  <style>
+    :root {
+      --bg: #0b0b0f;
+      --card: #14141b;
+      --text: #f3f4f6;
+      --muted: #b5b8c5;
+      --accent: #ff8a3d;
+      --border: rgba(255,255,255,0.08);
+    }
+
+    * { box-sizing: border-box; }
+    body {
+      margin: 0;
+      font-family: -apple-system, BlinkMacSystemFont, "SF Pro Text", "Segoe UI", sans-serif;
+      background: linear-gradient(180deg, #0b0b0f 0%, #11131a 100%);
+      color: var(--text);
+      line-height: 1.6;
+    }
+
+    .wrap {
+      max-width: 860px;
+      margin: 0 auto;
+      padding: 32px 20px 64px;
+    }
+
+    nav {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 48px;
+    }
+
+    .brand {
+      font-weight: 700;
+      letter-spacing: 0.2px;
+    }
+
+    .nav-links a {
+      color: var(--muted);
+      text-decoration: none;
+      margin-left: 18px;
+    }
+
+    .nav-links a:hover { color: var(--text); }
+
+    .hero {
+      padding: 48px 28px;
+      background: rgba(255,255,255,0.03);
+      border: 1px solid var(--border);
+      border-radius: 24px;
+      backdrop-filter: blur(10px);
+    }
+
+    h1 {
+      margin: 0 0 14px;
+      font-size: clamp(2rem, 5vw, 3.6rem);
+      line-height: 1.05;
+      letter-spacing: -0.03em;
+    }
+
+    .sub {
+      max-width: 650px;
+      color: var(--muted);
+      font-size: 1.08rem;
+      margin-bottom: 28px;
+    }
+
+    .buttons {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 12px;
+      margin-top: 20px;
+    }
+
+    .btn {
+      display: inline-block;
+      padding: 13px 18px;
+      border-radius: 14px;
+      text-decoration: none;
+      font-weight: 600;
+      border: 1px solid var(--border);
+    }
+
+    .btn.primary {
+      background: var(--accent);
+      color: #111;
+      border-color: transparent;
+    }
+
+    .btn.secondary {
+      color: var(--text);
+      background: rgba(255,255,255,0.04);
+    }
+
+    .section {
+      margin-top: 28px;
+      padding: 26px 28px;
+      background: rgba(255,255,255,0.03);
+      border: 1px solid var(--border);
+      border-radius: 24px;
+    }
+
+    h2 {
+      margin-top: 0;
+      font-size: 1.2rem;
+      letter-spacing: -0.02em;
+    }
+
+    footer {
+      margin-top: 28px;
+      color: var(--muted);
+      font-size: 0.95rem;
+    }
+
+    footer a {
+      color: var(--muted);
+    }
+  </style>
+</head>
+<body>
+  <div class="wrap">
+    <nav>
+      <div class="brand">Tiqan</div>
+      <div class="nav-links">
+        <a href="privacy.html">Privacy Policy</a>
+      </div>
+    </nav>
+
+    <main>
+      <section class="hero">
+        <h1>Train smarter with Your Tiqan</h1>
+        <p class="sub">
+          A simple, focused fitness app designed to help you stay consistent, track progress,
+          and make your training feel clear and enjoyable.
+        </p>
+
+        <div class="buttons">
+          <a class="btn primary" href="https://apps.apple.com/app/idYOUR_APP_ID" target="_blank" rel="noopener noreferrer">View on the App Store</a>
+          <a class="btn secondary" href="privacy.html">Privacy Policy</a>
+        </div>
+      </section>
+
+      <section class="section">
+        <h2>About the app</h2>
+        <p>
+          Replace this with your own app description. Keep it short and clear. Explain what your app does,
+          who it is for, and why someone should download it.
+        </p>
+        <p>
+          Example: Your App Name helps users follow structured workouts, track performance,
+          and stay motivated with a clean and simple experience.
+        </p>
+      </section>
+
+      <section class="section">
+        <h2>Support</h2>
+        <p>
+          For support, contact:
+          <a href="mailto:support@luna.bh">support@yluna.bh</a>
+        </p>
+      </section>
+    </main>
+
+    <footer>
+      © <span id="year"></span> Your App Name. All rights reserved.
+    </footer>
+  </div>
+
+  <script>
+    document.getElementById("year").textContent = new Date().getFullYear();
+  </script>
+</body>
+</html>
