@@ -4,60 +4,88 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>Tiqan</title>
+  <meta name="description" content="Tiqan is an adaptive calisthenics training system that helps you build strength, improve control, and progress with purpose.">
 
   <style>
     :root {
-      --bg: #0b0b0f;
-      --card: #14141b;
-      --text: #f3f4f6;
-      --muted: #b5b8c5;
+      --bg: #06070a;
+      --bg-2: #0d1016;
+      --card: rgba(255,255,255,0.05);
+      --card-2: rgba(255,255,255,0.03);
+      --text: #f5f7fb;
+      --muted: #b7becc;
       --accent: #ff8a3d;
+      --accent-soft: rgba(255,138,61,0.18);
       --border: rgba(255,255,255,0.08);
+      --border-strong: rgba(255,255,255,0.12);
+      --shadow: 0 20px 60px rgba(0,0,0,0.35);
     }
 
     * { box-sizing: border-box; }
 
+    html {
+      scroll-behavior: smooth;
+    }
+
     body {
       margin: 0;
-      font-family: -apple-system, BlinkMacSystemFont, "SF Pro Text", "Segoe UI", sans-serif;
-      background: linear-gradient(180deg, #0b0b0f 0%, #11131a 100%);
+      font-family: -apple-system, BlinkMacSystemFont, "SF Pro Display", "SF Pro Text", "Segoe UI", sans-serif;
       color: var(--text);
       line-height: 1.6;
+      background:
+        radial-gradient(circle at top center, rgba(255,138,61,0.16), transparent 26%),
+        radial-gradient(circle at 80% 18%, rgba(255,255,255,0.06), transparent 20%),
+        linear-gradient(180deg, var(--bg) 0%, var(--bg-2) 100%);
+      min-height: 100vh;
     }
 
     .wrap {
-      max-width: 880px;
+      max-width: 1080px;
       margin: 0 auto;
-      padding: 32px 20px 64px;
+      padding: 24px 20px 72px;
     }
 
     .header {
       display: flex;
       align-items: center;
       justify-content: space-between;
-      margin-bottom: 48px;
+      gap: 16px;
+      margin-bottom: 28px;
+      padding: 6px 2px;
     }
 
     .brand {
-      display: flex;
+      display: inline-flex;
       align-items: center;
       gap: 12px;
-      font-weight: 700;
-      font-size: 20px;
-      letter-spacing: 0.3px;
+      text-decoration: none;
+      color: var(--text);
     }
 
     .brand img {
-      height: 32px;
-      width: 32px;
+      width: 34px;
+      height: 34px;
       object-fit: contain;
+      display: block;
+    }
+
+    .brand-name {
+      font-size: 1.1rem;
+      font-weight: 700;
+      letter-spacing: 0.01em;
+    }
+
+    .nav {
+      display: flex;
+      align-items: center;
+      gap: 20px;
     }
 
     .nav a {
       color: var(--muted);
       text-decoration: none;
-      margin-left: 18px;
-      font-size: 14px;
+      font-size: 0.95rem;
+      transition: color 0.2s ease;
     }
 
     .nav a:hover {
@@ -65,81 +93,352 @@
     }
 
     .hero {
-      padding: 48px 28px;
-      background: rgba(255,255,255,0.03);
+      position: relative;
+      overflow: hidden;
+      padding: 56px 34px 36px;
+      border-radius: 32px;
+      background:
+        linear-gradient(180deg, rgba(255,255,255,0.06), rgba(255,255,255,0.025)),
+        linear-gradient(135deg, rgba(255,138,61,0.08), rgba(255,255,255,0.01) 42%, rgba(255,255,255,0.02));
       border: 1px solid var(--border);
-      border-radius: 24px;
-      backdrop-filter: blur(10px);
+      box-shadow: var(--shadow);
+      backdrop-filter: blur(14px);
+      -webkit-backdrop-filter: blur(14px);
+    }
+
+    .hero::before {
+      content: "";
+      position: absolute;
+      inset: 0;
+      background:
+        radial-gradient(circle at 18% 0%, rgba(255,138,61,0.17), transparent 30%),
+        radial-gradient(circle at 82% 12%, rgba(255,255,255,0.07), transparent 22%);
+      pointer-events: none;
+    }
+
+    .hero-grid {
+      position: relative;
+      z-index: 1;
+      display: grid;
+      grid-template-columns: minmax(0, 1.2fr) minmax(280px, 0.8fr);
+      gap: 32px;
+      align-items: stretch;
+    }
+
+    .eyebrow {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      margin-bottom: 16px;
+      padding: 8px 12px;
+      border-radius: 999px;
+      background: rgba(255,255,255,0.05);
+      border: 1px solid rgba(255,255,255,0.08);
+      color: var(--muted);
+      font-size: 0.82rem;
+      letter-spacing: 0.03em;
+      text-transform: uppercase;
+    }
+
+    .eyebrow-dot {
+      width: 7px;
+      height: 7px;
+      border-radius: 50%;
+      background: var(--accent);
+      box-shadow: 0 0 18px rgba(255,138,61,0.9);
+      flex: 0 0 auto;
     }
 
     h1 {
-      margin: 0 0 16px;
-      font-size: clamp(2.2rem, 5vw, 3.6rem);
-      line-height: 1.05;
-      letter-spacing: -0.03em;
+      margin: 0;
+      font-size: clamp(2.8rem, 6vw, 5rem);
+      line-height: 0.98;
+      letter-spacing: -0.05em;
+      max-width: 720px;
     }
 
-    .sub {
+    .hero-sub {
+      max-width: 640px;
+      margin: 18px 0 0;
+      font-size: 1.14rem;
       color: var(--muted);
-      font-size: 1.1rem;
-      max-width: 650px;
-      margin-bottom: 28px;
+      line-height: 1.7;
     }
 
-    .buttons {
+    .hero-cta {
       display: flex;
-      gap: 12px;
+      align-items: center;
+      gap: 18px;
       flex-wrap: wrap;
+      margin-top: 28px;
     }
 
-    .btn {
-      padding: 14px 18px;
+    .appstore-link {
+      display: inline-flex;
+      align-items: center;
+      text-decoration: none;
       border-radius: 14px;
+      transition: transform 0.18s ease, opacity 0.18s ease;
+    }
+
+    .appstore-link:hover {
+      transform: translateY(-1px);
+      opacity: 0.96;
+    }
+
+    .appstore-link img {
+      height: 56px;
+      width: auto;
+      display: block;
+    }
+
+    .hero-secondary {
+      color: var(--muted);
       text-decoration: none;
       font-weight: 600;
-      border: 1px solid var(--border);
-      font-size: 14px;
+      font-size: 0.98rem;
+      padding: 12px 0;
+      transition: color 0.2s ease;
     }
 
-    .btn.primary {
-      background: var(--accent);
-      color: #111;
-      border: none;
-    }
-
-    .btn.secondary {
+    .hero-secondary:hover {
       color: var(--text);
+    }
+
+    .hero-note {
+      margin-top: 16px;
+      font-size: 0.95rem;
+      color: #98a2b3;
+    }
+
+    .hero-panel {
+      position: relative;
+      min-height: 100%;
+      border-radius: 28px;
+      padding: 24px;
+      background:
+        linear-gradient(180deg, rgba(255,255,255,0.08), rgba(255,255,255,0.03));
+      border: 1px solid var(--border-strong);
+      box-shadow: inset 0 1px 0 rgba(255,255,255,0.04);
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      gap: 18px;
+    }
+
+    .panel-glow {
+      position: absolute;
+      top: -40px;
+      right: -20px;
+      width: 160px;
+      height: 160px;
+      border-radius: 50%;
+      background: radial-gradient(circle, rgba(255,138,61,0.32), transparent 70%);
+      filter: blur(12px);
+      pointer-events: none;
+    }
+
+    .panel-top {
+      position: relative;
+      z-index: 1;
+    }
+
+    .panel-label {
+      color: #c9d0dc;
+      font-size: 0.85rem;
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+      margin-bottom: 14px;
+    }
+
+    .metric-card {
+      border-radius: 22px;
+      padding: 18px 18px 16px;
+      background: rgba(255,255,255,0.05);
+      border: 1px solid rgba(255,255,255,0.08);
+      margin-bottom: 14px;
+    }
+
+    .metric-title {
+      font-size: 0.88rem;
+      color: var(--muted);
+      margin-bottom: 8px;
+    }
+
+    .metric-value {
+      font-size: 1.7rem;
+      line-height: 1;
+      letter-spacing: -0.04em;
+      font-weight: 700;
+      margin-bottom: 8px;
+    }
+
+    .metric-foot {
+      font-size: 0.9rem;
+      color: #cfd5df;
+    }
+
+    .mini-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 12px;
+    }
+
+    .mini-card {
+      border-radius: 18px;
+      padding: 14px;
       background: rgba(255,255,255,0.04);
+      border: 1px solid rgba(255,255,255,0.08);
     }
 
-    .section {
-      margin-top: 28px;
-      padding: 28px;
-      background: rgba(255,255,255,0.03);
+    .mini-card strong {
+      display: block;
+      font-size: 1rem;
+      margin-bottom: 4px;
+    }
+
+    .mini-card span {
+      display: block;
+      color: var(--muted);
+      font-size: 0.88rem;
+      line-height: 1.45;
+    }
+
+    .overview {
+      margin-top: 22px;
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: 14px;
+    }
+
+    .overview-card {
+      padding: 18px;
+      border-radius: 22px;
+      background: var(--card-2);
       border: 1px solid var(--border);
-      border-radius: 24px;
     }
 
-    h2 {
-      margin-top: 0;
-      font-size: 1.1rem;
-      letter-spacing: 0.04em;
+    .overview-card h2 {
+      margin: 0 0 8px;
+      font-size: 0.9rem;
+      letter-spacing: 0.08em;
       text-transform: uppercase;
       color: var(--muted);
     }
 
-    p {
-      margin: 10px 0 0;
+    .overview-card p {
+      margin: 0;
+      color: #d6dbe5;
+      font-size: 0.97rem;
+      line-height: 1.65;
+    }
+
+    .section {
+      margin-top: 22px;
+      padding: 28px;
+      border-radius: 28px;
+      background: var(--card-2);
+      border: 1px solid var(--border);
+      box-shadow: 0 12px 36px rgba(0,0,0,0.18);
+    }
+
+    .section h2 {
+      margin: 0 0 10px;
+      font-size: 0.92rem;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      color: var(--muted);
+    }
+
+    .section p {
+      margin: 0;
+      color: #dde2ea;
+      font-size: 1rem;
+      line-height: 1.75;
+    }
+
+    .section + .section p {
+      max-width: 900px;
     }
 
     footer {
-      margin-top: 32px;
+      margin-top: 28px;
+      padding: 0 2px;
       color: var(--muted);
-      font-size: 0.9rem;
+      font-size: 0.94rem;
     }
 
     footer a {
       color: var(--muted);
+      text-decoration: none;
+    }
+
+    footer a:hover {
+      color: var(--text);
+    }
+
+    @media (max-width: 920px) {
+      .hero-grid,
+      .overview {
+        grid-template-columns: 1fr;
+      }
+
+      .hero {
+        padding: 42px 24px 24px;
+      }
+
+      h1 {
+        max-width: none;
+      }
+
+      .hero-panel {
+        min-height: 0;
+      }
+    }
+
+    @media (max-width: 640px) {
+      .wrap {
+        padding: 18px 14px 56px;
+      }
+
+      .header {
+        align-items: flex-start;
+        flex-direction: column;
+        margin-bottom: 20px;
+      }
+
+      .nav {
+        gap: 14px;
+      }
+
+      .hero {
+        border-radius: 24px;
+        padding: 34px 18px 18px;
+      }
+
+      .hero-sub {
+        font-size: 1.02rem;
+      }
+
+      .hero-cta {
+        align-items: flex-start;
+        flex-direction: column;
+        gap: 10px;
+      }
+
+      .appstore-link img {
+        height: 52px;
+      }
+
+      .section,
+      .overview-card,
+      .hero-panel {
+        border-radius: 22px;
+      }
+
+      .mini-grid {
+        grid-template-columns: 1fr;
+      }
     }
   </style>
 </head>
@@ -147,100 +446,119 @@
 <body>
   <div class="wrap">
 
-    <div class="header">
-      <div class="brand">
-        <span>Tiqan</span>
+    <header class="header">
+      <a class="brand" href="index.html" aria-label="Tiqan home">
         <img src="tiqanLogo.png" alt="Tiqan logo">
-      </div>
+        <span class="brand-name">Tiqan</span>
+      </a>
 
-      <div class="nav">
-        <a href="privacy.html">Privacy</a>
-      </div>
-    </div>
+      <nav class="nav">
+        <a href="privacy.html">Privacy Policy</a>
+      </nav>
+    </header>
 
     <main>
-
       <section class="hero">
-        <h1>Master your movement with Tiqan</h1>
+        <div class="hero-grid">
+          <div>
+            <div class="eyebrow">
+              <span class="eyebrow-dot"></span>
+              Adaptive calisthenics training
+            </div>
 
-        <p class="sub">
-          Train smarter. Progress faster. Stay consistent.
-        </p>
+            <h1>Master your movement with Tiqan.</h1>
 
-        <div class="buttons">
-          <a class="btn primary" href="#" target="_blank">View on the App Store</a>
-          <a class="btn secondary" href="privacy.html">Privacy Policy</a>
+            <p class="hero-sub">
+              Tiqan is a calisthenics training system that adapts to you, helping you build strength, improve control, and progress with purpose. Whether you are just starting or already experienced, your training evolves based on your performance so you are always challenged at the right level.
+            </p>
+
+            <div class="hero-cta">
+              <a class="appstore-link" href="#" target="_blank" rel="noopener noreferrer" aria-label="Download on the App Store">
+                <img src="appstorebadge.svg" alt="Download on the App Store">
+              </a>
+
+              <a class="hero-secondary" href="privacy.html">View Privacy Policy</a>
+            </div>
+
+            <div class="hero-note">
+              Free to start. Unlock adaptive programs and advanced progression with a premium subscription.
+            </div>
+          </div>
+
+          <aside class="hero-panel" aria-label="App highlights">
+            <div class="panel-glow"></div>
+
+            <div class="panel-top">
+              <div class="panel-label">Built for progress</div>
+
+              <div class="metric-card">
+                <div class="metric-title">Training that adapts</div>
+                <div class="metric-value">Smarter progression</div>
+                <div class="metric-foot">Exercises, volume, and difficulty adjust based on how you perform.</div>
+              </div>
+            </div>
+
+            <div class="mini-grid">
+              <div class="mini-card">
+                <strong>Quick assessment</strong>
+                <span>Start from your current level with a program tailored to your ability.</span>
+              </div>
+
+              <div class="mini-card">
+                <strong>Track precisely</strong>
+                <span>Log sets, reps, time, and effort so progress is clear and measurable.</span>
+              </div>
+
+              <div class="mini-card">
+                <strong>Structured days</strong>
+                <span>Train with balanced movement patterns and less guesswork.</span>
+              </div>
+
+              <div class="mini-card">
+                <strong>Custom workouts</strong>
+                <span>Create your own sessions whenever you want full control and flexibility.</span>
+              </div>
+            </div>
+          </aside>
+        </div>
+      </section>
+
+      <section class="overview">
+        <div class="overview-card">
+          <h2>Adaptive Training Built for You</h2>
+          <p>Start with a quick assessment and get a personalized program based on your current ability. As you log workouts, Tiqan intelligently adjusts your exercises, volume, and difficulty, helping you progress safely and effectively.</p>
+        </div>
+
+        <div class="overview-card">
+          <h2>Structured Calisthenics Programs</h2>
+          <p>No more guessing what to do next. Each program is organized into clear training days with balanced movement patterns, so you can focus on training instead of planning.</p>
+        </div>
+
+        <div class="overview-card">
+          <h2>Train With Precision</h2>
+          <p>Log sets, reps, time, effort (RPE), and track how you perform, not just what you complete.</p>
         </div>
       </section>
 
       <section class="section">
-        <p>
-          Tiqan is a calisthenics training system that adapts to you, helping you build strength, improve control, and progress with purpose.
-        </p>
-
-        <p>
-          Whether you are just starting or already experienced, your training evolves based on your performance so you are always challenged at the right level.
-        </p>
-      </section>
-
-      <section class="section">
-        <h2>Adaptive Training Built for You</h2>
-        <p>
-          Start with a quick assessment and get a personalized program based on your current ability. As you log workouts, Tiqan intelligently adjusts your exercises, volume, and difficulty, helping you progress safely and effectively.
-        </p>
-      </section>
-
-      <section class="section">
-        <h2>Structured Calisthenics Programs</h2>
-        <p>
-          No more guessing what to do next. Each program is organized into clear training days with balanced movement patterns, so you can focus on training instead of planning.
-        </p>
-      </section>
-
-      <section class="section">
-        <h2>Train With Precision</h2>
-        <p>
-          Log sets, reps, time, effort (RPE), and track how you perform, not just what you complete.
-        </p>
-      </section>
-
-      <section class="section">
         <h2>Progress You Can See</h2>
-        <p>
-          Know exactly where you stand. Track your level, monitor improvements, and understand what to work on next.
-        </p>
+        <p>Know exactly where you stand. Track your level, monitor improvements, and understand what to work on next.</p>
       </section>
 
       <section class="section">
         <h2>Custom Workouts</h2>
-        <p>
-          Create your own workouts and train your way, perfect for full control and flexibility.
-        </p>
+        <p>Create your own workouts and train your way, perfect for full control and flexibility.</p>
       </section>
 
       <section class="section">
         <h2>Designed for Consistency</h2>
-        <p>
-          Simple, focused, and distraction free. Everything is built to help you show up, train, and improve.
-        </p>
-      </section>
-
-      <section class="section">
-        <p>
-          Free to start. Unlock adaptive programs and advanced progression with a premium subscription.
-        </p>
+        <p>Simple, focused, and distraction free. Everything is built to help you show up, train, and improve.</p>
       </section>
 
       <section class="section">
         <h2>Why Tiqan</h2>
-        <p>
-          From Itqan, meaning mastery, precision, and doing things right.
-        </p>
-        <p>
-          That is what every workout in Tiqan is built around.
-        </p>
+        <p>From Itqan, meaning mastery, precision, and doing things right. That is what every workout in Tiqan is built around.</p>
       </section>
-
     </main>
 
     <footer>
