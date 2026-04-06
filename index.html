@@ -3,8 +3,8 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>Your App Name</title>
-  <meta name="description" content="A simple app website for Your App Name.">
+  <title>Tiqan</title>
+
   <style>
     :root {
       --bg: #0b0b0f;
@@ -16,6 +16,7 @@
     }
 
     * { box-sizing: border-box; }
+
     body {
       margin: 0;
       font-family: -apple-system, BlinkMacSystemFont, "SF Pro Text", "Segoe UI", sans-serif;
@@ -25,30 +26,43 @@
     }
 
     .wrap {
-      max-width: 860px;
+      max-width: 880px;
       margin: 0 auto;
       padding: 32px 20px 64px;
     }
 
-    nav {
+    .header {
       display: flex;
-      justify-content: space-between;
       align-items: center;
+      justify-content: space-between;
       margin-bottom: 48px;
     }
 
     .brand {
+      display: flex;
+      align-items: center;
+      gap: 12px;
       font-weight: 700;
-      letter-spacing: 0.2px;
+      font-size: 20px;
+      letter-spacing: 0.3px;
     }
 
-    .nav-links a {
+    .brand img {
+      height: 32px;
+      width: 32px;
+      object-fit: contain;
+    }
+
+    .nav a {
       color: var(--muted);
       text-decoration: none;
       margin-left: 18px;
+      font-size: 14px;
     }
 
-    .nav-links a:hover { color: var(--text); }
+    .nav a:hover {
+      color: var(--text);
+    }
 
     .hero {
       padding: 48px 28px;
@@ -59,39 +73,38 @@
     }
 
     h1 {
-      margin: 0 0 14px;
-      font-size: clamp(2rem, 5vw, 3.6rem);
+      margin: 0 0 16px;
+      font-size: clamp(2.2rem, 5vw, 3.6rem);
       line-height: 1.05;
       letter-spacing: -0.03em;
     }
 
     .sub {
-      max-width: 650px;
       color: var(--muted);
-      font-size: 1.08rem;
+      font-size: 1.1rem;
+      max-width: 650px;
       margin-bottom: 28px;
     }
 
     .buttons {
       display: flex;
-      flex-wrap: wrap;
       gap: 12px;
-      margin-top: 20px;
+      flex-wrap: wrap;
     }
 
     .btn {
-      display: inline-block;
-      padding: 13px 18px;
+      padding: 14px 18px;
       border-radius: 14px;
       text-decoration: none;
       font-weight: 600;
       border: 1px solid var(--border);
+      font-size: 14px;
     }
 
     .btn.primary {
       background: var(--accent);
       color: #111;
-      border-color: transparent;
+      border: none;
     }
 
     .btn.secondary {
@@ -101,7 +114,7 @@
 
     .section {
       margin-top: 28px;
-      padding: 26px 28px;
+      padding: 28px;
       background: rgba(255,255,255,0.03);
       border: 1px solid var(--border);
       border-radius: 24px;
@@ -109,14 +122,20 @@
 
     h2 {
       margin-top: 0;
-      font-size: 1.2rem;
-      letter-spacing: -0.02em;
+      font-size: 1.1rem;
+      letter-spacing: 0.04em;
+      text-transform: uppercase;
+      color: var(--muted);
+    }
+
+    p {
+      margin: 10px 0 0;
     }
 
     footer {
-      margin-top: 28px;
+      margin-top: 32px;
       color: var(--muted);
-      font-size: 0.95rem;
+      font-size: 0.9rem;
     }
 
     footer a {
@@ -124,57 +143,110 @@
     }
   </style>
 </head>
+
 <body>
   <div class="wrap">
-    <nav>
-      <div class="brand">Tiqan</div>
-      <div class="nav-links">
-        <a href="privacy.html">Privacy Policy</a>
+
+    <div class="header">
+      <div class="brand">
+        <span>Tiqan</span>
+        <img src="tiqanLogo.png" alt="Tiqan logo">
       </div>
-    </nav>
+
+      <div class="nav">
+        <a href="privacy.html">Privacy</a>
+      </div>
+    </div>
 
     <main>
+
       <section class="hero">
-        <h1>Train smarter with Your Tiqan</h1>
+        <h1>Master your movement with Tiqan</h1>
+
         <p class="sub">
-          A simple, focused fitness app designed to help you stay consistent, track progress,
-          and make your training feel clear and enjoyable.
+          Train smarter. Progress faster. Stay consistent.
         </p>
 
         <div class="buttons">
-          <a class="btn primary" href="https://apps.apple.com/app/idYOUR_APP_ID" target="_blank" rel="noopener noreferrer">View on the App Store</a>
+          <a class="btn primary" href="#" target="_blank">View on the App Store</a>
           <a class="btn secondary" href="privacy.html">Privacy Policy</a>
         </div>
       </section>
 
       <section class="section">
-        <h2>About the app</h2>
         <p>
-          Replace this with your own app description. Keep it short and clear. Explain what your app does,
-          who it is for, and why someone should download it.
+          Tiqan is a calisthenics training system that adapts to you, helping you build strength, improve control, and progress with purpose.
         </p>
+
         <p>
-          Example: Your App Name helps users follow structured workouts, track performance,
-          and stay motivated with a clean and simple experience.
+          Whether you are just starting or already experienced, your training evolves based on your performance so you are always challenged at the right level.
         </p>
       </section>
 
       <section class="section">
-        <h2>Support</h2>
+        <h2>Adaptive Training Built for You</h2>
         <p>
-          For support, contact:
-          <a href="mailto:support@luna.bh">support@yluna.bh</a>
+          Start with a quick assessment and get a personalized program based on your current ability. As you log workouts, Tiqan intelligently adjusts your exercises, volume, and difficulty, helping you progress safely and effectively.
         </p>
       </section>
+
+      <section class="section">
+        <h2>Structured Calisthenics Programs</h2>
+        <p>
+          No more guessing what to do next. Each program is organized into clear training days with balanced movement patterns, so you can focus on training instead of planning.
+        </p>
+      </section>
+
+      <section class="section">
+        <h2>Train With Precision</h2>
+        <p>
+          Log sets, reps, time, effort (RPE), and track how you perform, not just what you complete.
+        </p>
+      </section>
+
+      <section class="section">
+        <h2>Progress You Can See</h2>
+        <p>
+          Know exactly where you stand. Track your level, monitor improvements, and understand what to work on next.
+        </p>
+      </section>
+
+      <section class="section">
+        <h2>Custom Workouts</h2>
+        <p>
+          Create your own workouts and train your way, perfect for full control and flexibility.
+        </p>
+      </section>
+
+      <section class="section">
+        <h2>Designed for Consistency</h2>
+        <p>
+          Simple, focused, and distraction free. Everything is built to help you show up, train, and improve.
+        </p>
+      </section>
+
+      <section class="section">
+        <p>
+          Free to start. Unlock adaptive programs and advanced progression with a premium subscription.
+        </p>
+      </section>
+
+      <section class="section">
+        <h2>Why Tiqan</h2>
+        <p>
+          From Itqan, meaning mastery, precision, and doing things right.
+        </p>
+        <p>
+          That is what every workout in Tiqan is built around.
+        </p>
+      </section>
+
     </main>
 
     <footer>
-      © <span id="year"></span> Your App Name. All rights reserved.
+      Contact: <a href="mailto:support@luna.bh">support@luna.bh</a>
     </footer>
-  </div>
 
-  <script>
-    document.getElementById("year").textContent = new Date().getFullYear();
-  </script>
+  </div>
 </body>
 </html>
