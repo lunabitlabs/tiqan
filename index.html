@@ -15,7 +15,6 @@
       --text: #f5f7fb;
       --muted: #b7becc;
       --accent: #ff8a3d;
-      --accent-soft: rgba(255,138,61,0.18);
       --border: rgba(255,255,255,0.08);
       --border-strong: rgba(255,255,255,0.12);
       --shadow: 0 20px 60px rgba(0,0,0,0.35);
@@ -23,20 +22,15 @@
 
     * { box-sizing: border-box; }
 
-    html {
-      scroll-behavior: smooth;
-    }
+    html { scroll-behavior: smooth; }
 
     body {
       margin: 0;
-      font-family: -apple-system, BlinkMacSystemFont, "SF Pro Display", "SF Pro Text", "Segoe UI", sans-serif;
+      font-family: -apple-system, BlinkMacSystemFont, "SF Pro Display", "Segoe UI", sans-serif;
       color: var(--text);
-      line-height: 1.6;
       background:
         radial-gradient(circle at top center, rgba(255,138,61,0.16), transparent 26%),
-        radial-gradient(circle at 80% 18%, rgba(255,255,255,0.06), transparent 20%),
         linear-gradient(180deg, var(--bg) 0%, var(--bg-2) 100%);
-      min-height: 100vh;
     }
 
     .wrap {
@@ -47,325 +41,133 @@
 
     .header {
       display: flex;
-      align-items: center;
       justify-content: space-between;
-      gap: 16px;
-      margin-bottom: 28px;
-      padding: 6px 2px;
+      align-items: center;
+      margin-bottom: 32px;
     }
 
     .brand {
-      display: inline-flex;
+      display: flex;
       align-items: center;
-      gap: 12px;
+      gap: 14px;
       text-decoration: none;
       color: var(--text);
     }
 
     .brand img {
-      width: 34px;
-      height: 34px;
-      object-fit: contain;
-      display: block;
+      width: 42px;
+      height: 42px;
     }
 
     .brand-name {
-      font-size: 1.1rem;
+      font-size: 1.35rem;
       font-weight: 700;
-      letter-spacing: 0.01em;
-    }
-
-    .nav {
-      display: flex;
-      align-items: center;
-      gap: 20px;
     }
 
     .nav a {
       color: var(--muted);
       text-decoration: none;
-      font-size: 0.95rem;
-      transition: color 0.2s ease;
-    }
-
-    .nav a:hover {
-      color: var(--text);
     }
 
     .hero {
       position: relative;
-      overflow: hidden;
-      padding: 56px 34px 36px;
+      padding: 72px 40px 48px;
       border-radius: 32px;
-      background:
-        linear-gradient(180deg, rgba(255,255,255,0.06), rgba(255,255,255,0.025)),
-        linear-gradient(135deg, rgba(255,138,61,0.08), rgba(255,255,255,0.01) 42%, rgba(255,255,255,0.02));
+      background: rgba(255,255,255,0.04);
       border: 1px solid var(--border);
       box-shadow: var(--shadow);
-      backdrop-filter: blur(14px);
-      -webkit-backdrop-filter: blur(14px);
+      overflow: hidden;
     }
 
-    .hero::before {
+    .hero::after {
       content: "";
       position: absolute;
-      inset: 0;
-      background:
-        radial-gradient(circle at 18% 0%, rgba(255,138,61,0.17), transparent 30%),
-        radial-gradient(circle at 82% 12%, rgba(255,255,255,0.07), transparent 22%);
-      pointer-events: none;
+      top: 0;
+      left: -40%;
+      width: 80%;
+      height: 2px;
+      background: linear-gradient(
+        90deg,
+        transparent,
+        rgba(255,138,61,0.7),
+        transparent
+      );
+      opacity: 0.6;
+      animation: shimmer 6s linear infinite;
     }
 
-    .hero-grid {
-      position: relative;
-      z-index: 1;
-      display: grid;
-      grid-template-columns: minmax(0, 1.2fr) minmax(280px, 0.8fr);
-      gap: 32px;
-      align-items: stretch;
-    }
-
-    .eyebrow {
-      display: inline-flex;
-      align-items: center;
-      gap: 8px;
-      margin-bottom: 16px;
-      padding: 8px 12px;
-      border-radius: 999px;
-      background: rgba(255,255,255,0.05);
-      border: 1px solid rgba(255,255,255,0.08);
-      color: var(--muted);
-      font-size: 0.82rem;
-      letter-spacing: 0.03em;
-      text-transform: uppercase;
-    }
-
-    .eyebrow-dot {
-      width: 7px;
-      height: 7px;
-      border-radius: 50%;
-      background: var(--accent);
-      box-shadow: 0 0 18px rgba(255,138,61,0.9);
-      flex: 0 0 auto;
+    @keyframes shimmer {
+      0% { transform: translateX(0); }
+      100% { transform: translateX(140%); }
     }
 
     h1 {
+      font-size: clamp(2.8rem, 6vw, 4.8rem);
       margin: 0;
-      font-size: clamp(2.8rem, 6vw, 5rem);
-      line-height: 0.98;
-      letter-spacing: -0.05em;
-      max-width: 720px;
+      line-height: 1;
     }
 
     .hero-sub {
-      max-width: 640px;
-      margin: 18px 0 0;
-      font-size: 1.14rem;
+      margin-top: 22px;
+      max-width: 620px;
       color: var(--muted);
-      line-height: 1.7;
+      font-size: 1.1rem;
     }
 
     .hero-cta {
-      display: flex;
-      align-items: center;
-      gap: 18px;
-      flex-wrap: wrap;
       margin-top: 28px;
-    }
-
-    .appstore-link {
-      display: inline-flex;
+      display: flex;
+      gap: 16px;
       align-items: center;
-      text-decoration: none;
-      border-radius: 14px;
-      transition: transform 0.18s ease, opacity 0.18s ease;
-    }
-
-    .appstore-link:hover {
-      transform: translateY(-1px);
-      opacity: 0.96;
     }
 
     .appstore-link img {
       height: 56px;
-      width: auto;
-      display: block;
-    }
-
-    .hero-secondary {
-      color: var(--muted);
-      text-decoration: none;
-      font-weight: 600;
-      font-size: 0.98rem;
-      padding: 12px 0;
-      transition: color 0.2s ease;
-    }
-
-    .hero-secondary:hover {
-      color: var(--text);
+      filter: drop-shadow(0 6px 14px rgba(0,0,0,0.4));
     }
 
     .hero-note {
       margin-top: 16px;
+      color: var(--muted);
       font-size: 0.95rem;
-      color: #98a2b3;
-    }
-
-    .hero-panel {
-      position: relative;
-      min-height: 100%;
-      border-radius: 28px;
-      padding: 24px;
-      background:
-        linear-gradient(180deg, rgba(255,255,255,0.08), rgba(255,255,255,0.03));
-      border: 1px solid var(--border-strong);
-      box-shadow: inset 0 1px 0 rgba(255,255,255,0.04);
-      display: flex;
-      flex-direction: column;
-      justify-content: space-between;
-      gap: 18px;
-    }
-
-    .panel-glow {
-      position: absolute;
-      top: -40px;
-      right: -20px;
-      width: 160px;
-      height: 160px;
-      border-radius: 50%;
-      background: radial-gradient(circle, rgba(255,138,61,0.32), transparent 70%);
-      filter: blur(12px);
-      pointer-events: none;
-    }
-
-    .panel-top {
-      position: relative;
-      z-index: 1;
-    }
-
-    .panel-label {
-      color: #c9d0dc;
-      font-size: 0.85rem;
-      text-transform: uppercase;
-      letter-spacing: 0.08em;
-      margin-bottom: 14px;
-    }
-
-    .metric-card {
-      border-radius: 22px;
-      padding: 18px 18px 16px;
-      background: rgba(255,255,255,0.05);
-      border: 1px solid rgba(255,255,255,0.08);
-      margin-bottom: 14px;
-    }
-
-    .metric-title {
-      font-size: 0.88rem;
-      color: var(--muted);
-      margin-bottom: 8px;
-    }
-
-    .metric-value {
-      font-size: 1.7rem;
-      line-height: 1;
-      letter-spacing: -0.04em;
-      font-weight: 700;
-      margin-bottom: 8px;
-    }
-
-    .metric-foot {
-      font-size: 0.9rem;
-      color: #cfd5df;
-    }
-
-    .mini-grid {
-      display: grid;
-      grid-template-columns: 1fr 1fr;
-      gap: 12px;
-    }
-
-    .mini-card {
-      border-radius: 18px;
-      padding: 14px;
-      background: rgba(255,255,255,0.04);
-      border: 1px solid rgba(255,255,255,0.08);
-    }
-
-    .mini-card strong {
-      display: block;
-      font-size: 1rem;
-      margin-bottom: 4px;
-    }
-
-    .mini-card span {
-      display: block;
-      color: var(--muted);
-      font-size: 0.88rem;
-      line-height: 1.45;
     }
 
     .overview {
-      margin-top: 22px;
+      margin-top: 28px;
       display: grid;
-      grid-template-columns: repeat(3, minmax(0, 1fr));
+      grid-template-columns: repeat(3, 1fr);
       gap: 14px;
     }
 
     .overview-card {
       padding: 18px;
-      border-radius: 22px;
+      border-radius: 20px;
       background: var(--card-2);
       border: 1px solid var(--border);
+      transition: transform 0.25s ease;
     }
 
-    .overview-card h2 {
-      margin: 0 0 8px;
-      font-size: 0.9rem;
-      letter-spacing: 0.08em;
-      text-transform: uppercase;
-      color: var(--muted);
-    }
-
-    .overview-card p {
-      margin: 0;
-      color: #d6dbe5;
-      font-size: 0.97rem;
-      line-height: 1.65;
+    .overview-card:hover {
+      transform: translateY(-2px);
     }
 
     .section {
       margin-top: 22px;
       padding: 28px;
-      border-radius: 28px;
+      border-radius: 24px;
       background: var(--card-2);
       border: 1px solid var(--border);
-      box-shadow: 0 12px 36px rgba(0,0,0,0.18);
+      transition: transform 0.25s ease;
     }
 
-    .section h2 {
-      margin: 0 0 10px;
-      font-size: 0.92rem;
-      letter-spacing: 0.08em;
-      text-transform: uppercase;
-      color: var(--muted);
-    }
-
-    .section p {
-      margin: 0;
-      color: #dde2ea;
-      font-size: 1rem;
-      line-height: 1.75;
-    }
-
-    .section + .section p {
-      max-width: 900px;
+    .section:hover {
+      transform: translateY(-2px);
     }
 
     footer {
-      margin-top: 28px;
-      padding: 0 2px;
+      margin-top: 32px;
       color: var(--muted);
-      font-size: 0.94rem;
+      font-size: 0.9rem;
     }
 
     footer a {
@@ -378,66 +180,12 @@
     }
 
     @media (max-width: 920px) {
-      .hero-grid,
       .overview {
         grid-template-columns: 1fr;
       }
 
       .hero {
-        padding: 42px 24px 24px;
-      }
-
-      h1 {
-        max-width: none;
-      }
-
-      .hero-panel {
-        min-height: 0;
-      }
-    }
-
-    @media (max-width: 640px) {
-      .wrap {
-        padding: 18px 14px 56px;
-      }
-
-      .header {
-        align-items: flex-start;
-        flex-direction: column;
-        margin-bottom: 20px;
-      }
-
-      .nav {
-        gap: 14px;
-      }
-
-      .hero {
-        border-radius: 24px;
-        padding: 34px 18px 18px;
-      }
-
-      .hero-sub {
-        font-size: 1.02rem;
-      }
-
-      .hero-cta {
-        align-items: flex-start;
-        flex-direction: column;
-        gap: 10px;
-      }
-
-      .appstore-link img {
-        height: 52px;
-      }
-
-      .section,
-      .overview-card,
-      .hero-panel {
-        border-radius: 22px;
-      }
-
-      .mini-grid {
-        grid-template-columns: 1fr;
+        padding: 48px 24px 32px;
       }
     }
   </style>
@@ -447,7 +195,7 @@
   <div class="wrap">
 
     <header class="header">
-      <a class="brand" href="index.html" aria-label="Tiqan home">
+      <a class="brand" href="index.html">
         <img src="tiqanLogo.png" alt="Tiqan logo">
         <span class="brand-name">Tiqan</span>
       </a>
@@ -458,111 +206,55 @@
     </header>
 
     <main>
+
       <section class="hero">
-        <div class="hero-grid">
-          <div>
-            <div class="eyebrow">
-              <span class="eyebrow-dot"></span>
-              Adaptive calisthenics training
-            </div>
+        <h1>Master your movement with Tiqan.</h1>
 
-            <h1>Master your movement with Tiqan.</h1>
+        <p class="hero-sub">
+          Adaptive calisthenics training that evolves with you. Build strength, improve control, and progress at the right level every time you train.
+        </p>
 
-            <p class="hero-sub">
-              Tiqan is a calisthenics training system that adapts to you, helping you build strength, improve control, and progress with purpose. Whether you are just starting or already experienced, your training evolves based on your performance so you are always challenged at the right level.
-            </p>
+        <div class="hero-cta">
+          <a class="appstore-link" href="https://apps.apple.com/app/idXXXXXXXXX" target="_blank" rel="noopener noreferrer">
+            <img src="appstorebadge.svg" alt="Download on the App Store">
+          </a>
+        </div>
 
-            <div class="hero-cta">
-              <a class="appstore-link" href="#" target="_blank" rel="noopener noreferrer" aria-label="Download on the App Store">
-                <img src="appstorebadge.svg" alt="Download on the App Store">
-              </a>
-
-              <a class="hero-secondary" href="privacy.html">View Privacy Policy</a>
-            </div>
-
-            <div class="hero-note">
-              Free to start. Unlock adaptive programs and advanced progression with a premium subscription.
-            </div>
-          </div>
-
-          <aside class="hero-panel" aria-label="App highlights">
-            <div class="panel-glow"></div>
-
-            <div class="panel-top">
-              <div class="panel-label">Built for progress</div>
-
-              <div class="metric-card">
-                <div class="metric-title">Training that adapts</div>
-                <div class="metric-value">Smarter progression</div>
-                <div class="metric-foot">Exercises, volume, and difficulty adjust based on how you perform.</div>
-              </div>
-            </div>
-
-            <div class="mini-grid">
-              <div class="mini-card">
-                <strong>Quick assessment</strong>
-                <span>Start from your current level with a program tailored to your ability.</span>
-              </div>
-
-              <div class="mini-card">
-                <strong>Track precisely</strong>
-                <span>Log sets, reps, time, and effort so progress is clear and measurable.</span>
-              </div>
-
-              <div class="mini-card">
-                <strong>Structured days</strong>
-                <span>Train with balanced movement patterns and less guesswork.</span>
-              </div>
-
-              <div class="mini-card">
-                <strong>Custom workouts</strong>
-                <span>Create your own sessions whenever you want full control and flexibility.</span>
-              </div>
-            </div>
-          </aside>
+        <div class="hero-note">
+          Start free. Unlock adaptive programs and advanced progression with premium.
         </div>
       </section>
 
       <section class="overview">
         <div class="overview-card">
-          <h2>Adaptive Training Built for You</h2>
-          <p>Start with a quick assessment and get a personalized program based on your current ability. As you log workouts, Tiqan intelligently adjusts your exercises, volume, and difficulty, helping you progress safely and effectively.</p>
+          <strong>Adaptive Training</strong>
+          <p>Programs adjust based on your performance so you always train at the right level.</p>
         </div>
 
         <div class="overview-card">
-          <h2>Structured Calisthenics Programs</h2>
-          <p>No more guessing what to do next. Each program is organized into clear training days with balanced movement patterns, so you can focus on training instead of planning.</p>
+          <strong>Structured Workouts</strong>
+          <p>Balanced training days remove guesswork and keep your progress consistent.</p>
         </div>
 
         <div class="overview-card">
-          <h2>Train With Precision</h2>
-          <p>Log sets, reps, time, effort (RPE), and track how you perform, not just what you complete.</p>
+          <strong>Track Everything</strong>
+          <p>Log reps, sets, time, and effort to measure real progress.</p>
         </div>
       </section>
 
       <section class="section">
-        <h2>Progress You Can See</h2>
-        <p>Know exactly where you stand. Track your level, monitor improvements, and understand what to work on next.</p>
+        <strong>Built for Real Progress</strong>
+        <p>
+          Track your level, understand your progress, and always know what to do next. 
+          Whether you follow an adaptive program or create your own workouts, Tiqan keeps your training focused and consistent.
+        </p>
       </section>
 
-      <section class="section">
-        <h2>Custom Workouts</h2>
-        <p>Create your own workouts and train your way, perfect for full control and flexibility.</p>
-      </section>
-
-      <section class="section">
-        <h2>Designed for Consistency</h2>
-        <p>Simple, focused, and distraction free. Everything is built to help you show up, train, and improve.</p>
-      </section>
-
-      <section class="section">
-        <h2>Why Tiqan</h2>
-        <p>From Itqan, meaning mastery, precision, and doing things right. That is what every workout in Tiqan is built around.</p>
-      </section>
     </main>
 
     <footer>
-      Contact: <a href="mailto:support@luna.bh">support@luna.bh</a>
+      Contact: <a href="mailto:support@luna.bh">support@luna.bh</a><br>
+      © 2026 Lunabit Labs
     </footer>
 
   </div>
