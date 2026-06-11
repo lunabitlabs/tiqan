@@ -51,8 +51,8 @@
       pointer-events: none;
       z-index: 0;
       background:
-        radial-gradient(ellipse 70% 50% at 20% 0%, rgba(107,140,255,0.18), transparent %),
-        radial-gradient(ellipse % 40% at 80% 10%, rgba(185,100,255,0.16), transparent 65%),
+        radial-gradient(ellipse 70% 50% at 20% 0%, rgba(107,140,255,0.18), transparent 60%),
+        radial-gradient(ellipse 60% 40% at 80% 10%, rgba(185,100,255,0.16), transparent 65%),
         radial-gradient(ellipse 80% 50% at 50% 90%, rgba(255,90,138,0.10), transparent 70%),
         linear-gradient(180deg, var(--bg) 0%, var(--bg-2) 100%);
     }
@@ -159,7 +159,7 @@
       margin: 0 0 24px;
       line-height: 0.98;
       letter-spacing: -0.035em;
-      font-weight: 0;
+      font-weight: 600;
     }
 
     .grad-text {
@@ -205,7 +205,7 @@
       display: flex;
       justify-content: center;
       align-items: center;
-      min-height: 0px;
+      min-height: 600px;
     }
 
     /* Phone — sculptural hero object */
@@ -238,7 +238,7 @@
       position: absolute;
       inset: -40px;
       z-index: -1;
-      background: radial-gradient(ellipse at center, rgba(185,100,255,0.35), transparent %);
+      background: radial-gradient(ellipse at center, rgba(185,100,255,0.35), transparent 60%);
       filter: blur(40px);
       opacity: 0.7;
     }
@@ -251,7 +251,7 @@
       padding: 32px 0;
       border-top: 1px solid var(--border);
       border-bottom: 1px solid var(--border);
-      margin-bottom: px;
+      margin-bottom: 60px;
     }
 
     .stat {
@@ -265,7 +265,7 @@
     .stat-num {
       font-family: var(--display);
       font-size: clamp(1.8rem, 3vw, 2.4rem);
-      font-weight: 0;
+      font-weight: 600;
       letter-spacing: -0.02em;
       line-height: 1;
       background: var(--gradient);
@@ -302,7 +302,7 @@
       font-family: var(--body);
       display: inline-block;
       font-size: 0.78rem;
-      font-weight: 0;
+      font-weight: 600;
       letter-spacing: 0.12em;
       text-transform: uppercase;
       color: var(--c-violet);
@@ -315,7 +315,7 @@
       margin: 0 0 22px;
       line-height: 1.05;
       letter-spacing: -0.025em;
-      font-weight: 0;
+      font-weight: 600;
     }
 
     .feature-text > p {
@@ -392,7 +392,7 @@
       font-size: clamp(2rem, 3.6vw, 2.8rem);
       margin: 0 0 16px;
       letter-spacing: -0.025em;
-      font-weight: 0;
+      font-weight: 600;
     }
 
     .extras-header p {
@@ -464,7 +464,7 @@
       font-family: var(--display);
       display: block;
       font-size: 1.1rem;
-      font-weight: 0;
+      font-weight: 600;
       letter-spacing: -0.01em;
       margin-bottom: 8px;
     }
@@ -507,7 +507,7 @@
       margin: 0 0 18px;
       letter-spacing: -0.03em;
       line-height: 1.05;
-      font-weight: 0;
+      font-weight: 600;
     }
 
     .final-cta p {
@@ -690,7 +690,7 @@
           <div class="stat-label">Progression Levels</div>
         </div>
         <div class="stat">
-          <div class="stat-num">+</div>
+          <div class="stat-num">180+</div>
           <div class="stat-label">Exercises</div>
         </div>
         <div class="stat">
@@ -786,19 +786,19 @@
       <!-- FEATURE 5 — Exercise Library -->
       <section class="feature feature--alt">
         <div class="feature-text">
-          <span class="feature-eyebrow">Exercise Library</span>
-          <h2>Every movement, every level.</h2>
-          <p>Illustrated exercises with full progression chains, regression paths, form cues, and common mistakes. Filter by level, search by name, and tap any movement for detail.</p>
+          <span class="feature-eyebrow">Library &amp; Muscle Map</span>
+          <h2>Every movement, every muscle.</h2>
+          <p>Browse 188 illustrated exercises with full progression chains, form cues, and common mistakes. A shaded body map shows exactly which muscles each movement works — tap a muscle to filter the library, flip from front to back, and see every workout mapped onto the body.</p>
           <ul class="feature-points">
-            <li>180+ exercises across push, pull, legs, and core</li>
-            <li>Progression chains visible from Foundation to Elite</li>
-            <li>Form cues and common mistakes per movement</li>
-            <li>Level filters: Beginner, Intermediate, Advanced</li>
+            <li>188 exercises across push, pull, legs, and core</li>
+            <li>Tap-a-muscle filter with front / back body map</li>
+            <li>Target-muscle maps in every workout preview and post-workout summary</li>
+            <li>Progression chains from Foundation to Elite, form cues per movement</li>
           </ul>
         </div>
         <div class="feature-img">
           <div class="phone">
-            <img src="screen-library.png" alt="Exercise library with level filters">
+            <img src="screen-library.png" alt="Muscle map filter — tap a muscle to find matching exercises, with front and back body views">
           </div>
         </div>
       </section>
