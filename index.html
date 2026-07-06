@@ -19,12 +19,12 @@
       --text: #f5f7fb;
       --muted: #a8b0bd;
       --muted-2: #6b7280;
-      --c-blue: #6b8cff;
-      --c-violet: #b964ff;
-      --c-pink: #ff5a8a;
-      --c-orange: #ff7a3d;
-      --gradient: linear-gradient(135deg, #6b8cff 0%, #b964ff 45%, #ff5a8a 75%, #ff7a3d 100%);
-      --gradient-soft: linear-gradient(135deg, rgba(107,140,255,0.15) 0%, rgba(185,100,255,0.15) 45%, rgba(255,90,138,0.15) 75%, rgba(255,122,61,0.15) 100%);
+      --c-blue: #60A5FA;
+      --c-violet: #8B5CF6;
+      --c-pink: #FB7185;
+      --c-orange: #FBBF24;
+      --gradient: linear-gradient(135deg, #60A5FA 0%, #8B5CF6 45%, #FB7185 75%, #FBBF24 100%);
+      --gradient-soft: linear-gradient(135deg, rgba(96,165,250,0.15) 0%, rgba(139,92,246,0.15) 45%, rgba(251,113,133,0.15) 75%, rgba(251,191,36,0.15) 100%);
       --border: rgba(255,255,255,0.08);
       --border-strong: rgba(255,255,255,0.14);
       --display: "Bricolage Grotesque", -apple-system, BlinkMacSystemFont, "SF Pro Display", system-ui, sans-serif;
@@ -51,9 +51,9 @@
       pointer-events: none;
       z-index: 0;
       background:
-        radial-gradient(ellipse 70% 50% at 20% 0%, rgba(107,140,255,0.18), transparent 60%),
-        radial-gradient(ellipse 60% 40% at 80% 10%, rgba(185,100,255,0.16), transparent 65%),
-        radial-gradient(ellipse 80% 50% at 50% 90%, rgba(255,90,138,0.10), transparent 70%),
+        radial-gradient(ellipse 70% 50% at 20% 0%, rgba(96,165,250,0.18), transparent 60%),
+        radial-gradient(ellipse 60% 40% at 80% 10%, rgba(139,92,246,0.16), transparent 65%),
+        radial-gradient(ellipse 80% 50% at 50% 90%, rgba(251,113,133,0.10), transparent 70%),
         linear-gradient(180deg, var(--bg) 0%, var(--bg-2) 100%);
     }
 
@@ -95,7 +95,7 @@
       width: 38px;
       height: 38px;
       border-radius: 10px;
-      box-shadow: 0 4px 14px rgba(185,100,255,0.25);
+      box-shadow: 0 4px 14px rgba(139,92,246,0.25);
     }
 
     .brand-name {
@@ -150,7 +150,7 @@
       height: 6px;
       border-radius: 50%;
       background: var(--gradient);
-      box-shadow: 0 0 8px rgba(185,100,255,0.6);
+      box-shadow: 0 0 8px rgba(139,92,246,0.6);
     }
 
     .hero h1 {
@@ -238,7 +238,7 @@
       position: absolute;
       inset: -40px;
       z-index: -1;
-      background: radial-gradient(ellipse at center, rgba(185,100,255,0.35), transparent 60%);
+      background: radial-gradient(ellipse at center, rgba(139,92,246,0.35), transparent 60%);
       filter: blur(40px);
       opacity: 0.7;
     }
@@ -350,7 +350,7 @@
       border-radius: 50%;
       background: var(--gradient);
       margin-top: 10px;
-      box-shadow: 0 0 6px rgba(185,100,255,0.4);
+      box-shadow: 0 0 6px rgba(139,92,246,0.4);
     }
 
     .feature-img {
@@ -364,16 +364,16 @@
       position: absolute;
       inset: -20px;
       z-index: -1;
-      background: radial-gradient(ellipse at center, rgba(107,140,255,0.18), transparent 65%);
+      background: radial-gradient(ellipse at center, rgba(96,165,250,0.18), transparent 65%);
       filter: blur(40px);
     }
 
     .feature--alt .feature-img::before {
-      background: radial-gradient(ellipse at center, rgba(255,122,61,0.16), transparent 65%);
+      background: radial-gradient(ellipse at center, rgba(251,191,36,0.16), transparent 65%);
     }
 
     .feature--alt2 .feature-img::before {
-      background: radial-gradient(ellipse at center, rgba(255,90,138,0.18), transparent 65%);
+      background: radial-gradient(ellipse at center, rgba(251,113,133,0.18), transparent 65%);
     }
 
     /* Extras grid */
@@ -482,8 +482,8 @@
       padding: 80px 40px;
       border-radius: 36px;
       background:
-        radial-gradient(ellipse at top, rgba(185,100,255,0.18), transparent 65%),
-        radial-gradient(ellipse at bottom right, rgba(255,122,61,0.12), transparent 65%),
+        radial-gradient(ellipse at top, rgba(139,92,246,0.18), transparent 65%),
+        radial-gradient(ellipse at bottom right, rgba(251,191,36,0.12), transparent 65%),
         rgba(255,255,255,0.025);
       border: 1px solid var(--border);
       text-align: center;
@@ -498,7 +498,7 @@
       left: 20%;
       right: 20%;
       height: 1px;
-      background: linear-gradient(90deg, transparent, rgba(185,100,255,0.6), transparent);
+      background: linear-gradient(90deg, transparent, rgba(139,92,246,0.6), transparent);
     }
 
     .final-cta h2 {
