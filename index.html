@@ -157,7 +157,7 @@
       box-shadow: 0 44px 90px rgba(0,0,0,0.55), 0 0 0 1px rgba(255,255,255,0.06), inset 0 0 0 1px rgba(255,255,255,0.05);
     }
     .phone img { width: 100%; border-radius: 38px; display: block; }
-    .phone--tilt { transform: rotate(-2deg); }
+    .phone--tilt { transform: none; }
     .phone-glow { position: absolute; inset: -34px; z-index: -1; filter: blur(46px); opacity: 0.7;
       background: radial-gradient(ellipse at center, rgba(108,107,255,0.4), transparent 62%); }
     /* placeholder shown until a screenshot is dropped in */
@@ -252,9 +252,7 @@
       box-shadow: 0 24px 46px rgba(0,0,0,0.52), 0 0 0 1px rgba(255,255,255,0.07), inset 0 0 0 1px rgba(255,255,255,0.05);
       transition: transform .25s ease; }
     .watch img { display: block; width: 100%; border-radius: 36px; }
-    .watch:nth-child(odd) { transform: rotate(-2deg); }
-    .watch:nth-child(even) { transform: rotate(2deg); }
-    .watch:hover { transform: translateY(-4px) rotate(0deg); }
+    .watch:hover { transform: translateY(-4px); }
     @media (max-width: 520px){ .watch { width: 134px; } }
 
     /* ---------- Extras grid ---------- */
