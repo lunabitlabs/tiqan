@@ -3,876 +3,550 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>Tiqan — Calisthenics, calibrated.</title>
-  <meta name="description" content="Adaptive calisthenics training for iPhone and Apple Watch. Build strength, track real progress, and always know what to do next.">
+  <title>Tiqan — Train smarter. Get stronger.</title>
+  <meta name="description" content="Tiqan is an adaptive calisthenics coach for iPhone, iPad, Mac and Apple Watch. It builds you a bodyweight plan for strength, skills, or mobility — and levels it up or down based on how each session actually goes.">
+  <meta name="theme-color" content="#0A0F1C">
+
+  <!-- Open Graph -->
+  <meta property="og:title" content="Tiqan — Train smarter. Get stronger.">
+  <meta property="og:description" content="An adaptive calisthenics coach that builds a bodyweight plan for strength, skills, or mobility and progresses it automatically.">
+  <meta property="og:type" content="website">
+  <meta property="og:url" content="https://www.tiqan.app">
+  <meta property="og:image" content="https://www.tiqan.app/tiqan-logo.png">
+
+  <link rel="icon" type="image/png" href="tiqan-logo.png">
+  <link rel="apple-touch-icon" href="tiqan-logo.png">
 
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,400;12..96,500;12..96,600;12..96,700;12..96,800&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
 
   <style>
+    /* ============================================================
+       Tiqan — "Vector" palette, lifted from the app (AppTheme.swift)
+       Dark-first premium landing page.
+       ============================================================ */
     :root {
-      --bg: #050608;
-      --bg-2: #0a0b10;
-      --card: rgba(255,255,255,0.04);
-      --card-hover: rgba(255,255,255,0.06);
-      --text: #f5f7fb;
-      --muted: #a8b0bd;
-      --muted-2: #6b7280;
-      --c-blue: #60A5FA;
-      --c-violet: #8B5CF6;
-      --c-pink: #FB7185;
-      --c-orange: #FBBF24;
-      --gradient: linear-gradient(135deg, #60A5FA 0%, #8B5CF6 45%, #FB7185 75%, #FBBF24 100%);
-      --gradient-soft: linear-gradient(135deg, rgba(96,165,250,0.15) 0%, rgba(139,92,246,0.15) 45%, rgba(251,113,133,0.15) 75%, rgba(251,191,36,0.15) 100%);
-      --border: rgba(255,255,255,0.08);
-      --border-strong: rgba(255,255,255,0.14);
-      --display: "Bricolage Grotesque", -apple-system, BlinkMacSystemFont, "SF Pro Display", system-ui, sans-serif;
-      --body: -apple-system, BlinkMacSystemFont, "SF Pro Text", "Segoe UI", system-ui, sans-serif;
+      /* Surfaces (app dark mode) */
+      --bg:            #0A0F1C;   /* appBackground */
+      --bg-2:          #0c1120;
+      --card:          #161D2E;   /* cardSurface */
+      --elevated:      #1F2740;   /* elevatedSurface */
+      --pill:          #27314D;   /* pillBackground */
+      --grad-card-top: #1F2740;
+      --grad-card-bot: #131A2A;
+
+      /* Accents (app, dark) */
+      --brand-blue:    #4070FF;   /* brandBlue — icon-exact */
+      --brand-ink:     #6698FF;   /* primaryAccent */
+      --brand-pink:    #FF99EE;   /* brandPink — icon-exact */
+      --coral:         #FB7185;   /* energyAccent */
+      --green:         #3DCC79;   /* progressAccent — icon-exact */
+      --amber:         #FFC24D;   /* levelAccent */
+      --violet:        #8B5CF6;
+
+      /* Text */
+      --text:          #F5F7FB;
+      --muted:         #AEB6C6;
+      --muted-2:       #78829A;
+
+      /* Structure */
+      --border:        rgba(255,255,255,0.09);
+      --border-strong: rgba(255,255,255,0.16);
+
+      /* The app's signature: blue → pink brand sweep */
+      --brand-sweep:   linear-gradient(105deg, #4070FF 0%, #6C6BFF 42%, #C77BFF 72%, #FF99EE 100%);
+      --brand-sweep-soft: linear-gradient(105deg, rgba(64,112,255,0.16) 0%, rgba(255,153,238,0.16) 100%);
+
+      /* Clean neutral grotesque — Helvetica Neue on Apple, Open Sans elsewhere */
+      --display: "Helvetica Neue", Helvetica, "Open Sans", Arial, system-ui, sans-serif;
+      --body: "Helvetica Neue", Helvetica, "Open Sans", Arial, system-ui, sans-serif;
+
+      --radius: 28px;
+      --radius-sm: 20px;
+      --maxw: 1160px;
     }
 
     * { box-sizing: border-box; }
-    html { scroll-behavior: smooth; }
-
+    html { scroll-behavior: smooth; -webkit-text-size-adjust: 100%; }
     body {
       margin: 0;
       font-family: var(--body);
       color: var(--text);
-      -webkit-font-smoothing: antialiased;
       background: var(--bg);
-      line-height: 1.55;
+      line-height: 1.6;
+      -webkit-font-smoothing: antialiased;
       overflow-x: hidden;
     }
+    a { color: inherit; }
+    img { max-width: 100%; display: block; }
 
-    /* Ambient background — gradient bloom + grain */
-    .bg-ambient {
-      position: fixed;
-      inset: 0;
-      pointer-events: none;
-      z-index: 0;
+    /* ---------- Ambient background ---------- */
+    .ambient {
+      position: fixed; inset: 0; z-index: 0; pointer-events: none;
       background:
-        radial-gradient(ellipse 70% 50% at 20% 0%, rgba(96,165,250,0.18), transparent 60%),
-        radial-gradient(ellipse 60% 40% at 80% 10%, rgba(139,92,246,0.16), transparent 65%),
-        radial-gradient(ellipse 80% 50% at 50% 90%, rgba(251,113,133,0.10), transparent 70%),
+        radial-gradient(60% 42% at 18% -4%, rgba(64,112,255,0.28), transparent 62%),
+        radial-gradient(48% 36% at 88% 4%, rgba(255,153,238,0.16), transparent 60%),
+        radial-gradient(70% 50% at 50% 108%, rgba(61,204,121,0.10), transparent 68%),
         linear-gradient(180deg, var(--bg) 0%, var(--bg-2) 100%);
     }
-
-    .bg-grain {
-      position: fixed;
-      inset: 0;
-      pointer-events: none;
-      z-index: 1;
-      opacity: 0.035;
-      mix-blend-mode: overlay;
+    .grain {
+      position: fixed; inset: 0; z-index: 1; pointer-events: none;
+      opacity: 0.03; mix-blend-mode: overlay;
       background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='3'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
     }
 
-    .wrap {
-      position: relative;
-      z-index: 2;
-      max-width: 1180px;
-      margin: 0 auto;
-      padding: 24px 28px 80px;
-    }
+    .wrap { position: relative; z-index: 2; max-width: var(--maxw); margin: 0 auto; padding: 0 26px; }
 
-    /* Header */
-    .header {
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      margin-bottom: 56px;
-    }
-
-    .brand {
-      display: flex;
-      align-items: center;
-      gap: 12px;
-      text-decoration: none;
-      color: var(--text);
-    }
-
-    .brand img {
-      width: 38px;
-      height: 38px;
-      border-radius: 10px;
-      box-shadow: 0 4px 14px rgba(139,92,246,0.25);
-    }
-
-    .brand-name {
-      font-family: var(--display);
-      font-size: 1.4rem;
-      font-weight: 700;
-      letter-spacing: -0.02em;
-    }
-
+    /* ---------- Nav ---------- */
     .nav {
-      display: flex;
-      gap: 28px;
-      align-items: center;
+      position: sticky; top: 0; z-index: 50;
+      backdrop-filter: saturate(140%) blur(14px);
+      -webkit-backdrop-filter: saturate(140%) blur(14px);
+      background: rgba(10,15,28,0.62);
+      border-bottom: 1px solid var(--border);
     }
-
-    .nav a {
-      color: var(--muted);
-      text-decoration: none;
-      font-size: 0.93rem;
-      transition: color 0.2s ease;
+    .nav-inner { max-width: var(--maxw); margin: 0 auto; padding: 13px 26px; display: flex; align-items: center; justify-content: space-between; }
+    .brand { display: flex; align-items: center; gap: 11px; text-decoration: none; color: var(--text); }
+    .brand img { width: 34px; height: 34px; border-radius: 9px; box-shadow: 0 4px 16px rgba(64,112,255,0.35); }
+    .brand span { font-family: var(--display); font-weight: 700; font-size: 1.28rem; letter-spacing: -0.02em; }
+    .nav-links { display: flex; align-items: center; gap: 26px; }
+    .nav-links a { text-decoration: none; color: var(--muted); font-size: 0.92rem; font-weight: 500; transition: color .2s; }
+    .nav-links a:hover { color: var(--text); }
+    .nav-cta {
+      display: inline-flex; align-items: center; gap: 7px;
+      padding: 8px 15px; border-radius: 999px; font-weight: 600; font-size: 0.9rem;
+      color: #fff; background: var(--brand-blue); text-decoration: none;
+      box-shadow: 0 6px 18px rgba(64,112,255,0.4); transition: transform .18s, box-shadow .18s;
     }
+    .nav-cta:hover { transform: translateY(-1px); box-shadow: 0 10px 24px rgba(64,112,255,0.5); }
+    @media (max-width: 720px) { .nav-links a:not(.nav-cta) { display: none; } }
 
-    .nav a:hover { color: var(--text); }
-
-    /* Hero */
-    .hero {
-      display: grid;
-      grid-template-columns: 1.05fr 0.95fr;
-      gap: 48px;
-      align-items: center;
-      padding: 40px 0 80px;
+    /* ---------- Shared type ---------- */
+    .eyebrow {
+      display: inline-flex; align-items: center; gap: 8px;
+      padding: 6px 13px; border-radius: 999px;
+      border: 1px solid var(--border-strong); background: rgba(255,255,255,0.03);
+      font-size: 0.78rem; font-weight: 600; letter-spacing: 0.04em; color: var(--muted);
     }
-
-    .hero-eyebrow {
-      display: inline-flex;
-      align-items: center;
-      gap: 8px;
-      padding: 7px 14px;
-      border-radius: 999px;
-      border: 1px solid var(--border-strong);
-      background: rgba(255,255,255,0.03);
-      font-size: 0.8rem;
-      font-weight: 500;
-      letter-spacing: 0.04em;
-      color: var(--muted);
-      margin-bottom: 28px;
+    .eyebrow::before { content:""; width: 6px; height: 6px; border-radius: 50%; background: var(--brand-sweep); box-shadow: 0 0 8px rgba(120,120,255,0.7); }
+    .grad {
+      background: var(--brand-sweep); -webkit-background-clip: text; background-clip: text; color: transparent;
     }
+    .section-eyebrow { font-size: 0.76rem; font-weight: 700; letter-spacing: 0.14em; text-transform: uppercase; color: var(--brand-ink); }
 
-    .hero-eyebrow::before {
-      content: "";
-      width: 6px;
-      height: 6px;
-      border-radius: 50%;
-      background: var(--gradient);
-      box-shadow: 0 0 8px rgba(139,92,246,0.6);
-    }
+    /* ---------- Hero (centered, logo-forward) ---------- */
+    .hero { display: flex; flex-direction: column; align-items: center; text-align: center; padding: 50px 0 68px; }
+    .hero-mark { width: clamp(120px, 15vw, 176px); height: auto; margin-bottom: 26px;
+      filter: drop-shadow(0 14px 34px rgba(108,107,255,0.42)); }
+    .hero .eyebrow { margin-bottom: 22px; }
+    .hero h1 { font-family: var(--display); font-size: clamp(2.9rem, 6.4vw, 5rem); line-height: 1.0; letter-spacing: -0.035em; font-weight: 700; margin: 0 0 22px; }
+    .hero p.lede { color: var(--muted); font-size: 1.16rem; max-width: 580px; margin: 0 auto 30px; }
+    .cta-row { display: flex; align-items: center; justify-content: center; gap: 18px; flex-wrap: wrap; }
+    .appstore img { height: 54px; filter: drop-shadow(0 10px 22px rgba(0,0,0,0.5)); transition: transform .2s; }
+    .appstore:hover img { transform: translateY(-2px); }
+    .hero-note { margin-top: 18px; color: var(--muted-2); font-size: 0.88rem; }
+    .hero-note b { color: var(--muted); font-weight: 600; }
 
-    .hero h1 {
-      font-family: var(--display);
-      font-size: clamp(2.8rem, 6.2vw, 5.2rem);
-      margin: 0 0 24px;
-      line-height: 0.98;
-      letter-spacing: -0.035em;
-      font-weight: 600;
-    }
-
-    .grad-text {
-      background: var(--gradient);
-      -webkit-background-clip: text;
-      background-clip: text;
-      color: transparent;
-      font-style: italic;
-      font-weight: 500;
-    }
-
-    .hero-sub {
-      color: var(--muted);
-      font-size: 1.18rem;
-      max-width: 520px;
-      margin: 0 0 36px;
-      line-height: 1.55;
-    }
-
-    .hero-cta {
-      display: flex;
-      gap: 20px;
-      align-items: center;
-      flex-wrap: wrap;
-    }
-
-    .appstore-link img {
-      height: 56px;
-      filter: drop-shadow(0 8px 20px rgba(0,0,0,0.5));
-      transition: transform 0.2s ease;
-    }
-
-    .appstore-link:hover img { transform: translateY(-2px); }
-
-    .hero-note {
-      margin-top: 22px;
-      color: var(--muted-2);
-      font-size: 0.9rem;
-    }
-
-    .hero-right {
-      position: relative;
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      min-height: 600px;
-    }
-
-    /* Phone — sculptural hero object */
+    /* ---------- Phone frame ---------- */
+    .hero-media { display: flex; justify-content: center; position: relative; margin-top: 56px; }
     .phone {
-      position: relative;
-      padding: 10px;
-      background: linear-gradient(150deg, #2c2f38 0%, #0a0c12 100%);
-      border-radius: 52px;
-      box-shadow:
-        0 50px 100px rgba(0,0,0,0.55),
-        0 0 0 1px rgba(255,255,255,0.06),
-        inset 0 0 0 1px rgba(255,255,255,0.04);
-      max-width: 320px;
-      width: 100%;
+      position: relative; width: 100%; max-width: 320px; padding: 9px;
+      background: linear-gradient(155deg, #2b3350 0%, #0b0f1c 100%);
+      border-radius: 46px;
+      box-shadow: 0 44px 90px rgba(0,0,0,0.55), 0 0 0 1px rgba(255,255,255,0.06), inset 0 0 0 1px rgba(255,255,255,0.05);
     }
+    .phone img { width: 100%; border-radius: 38px; display: block; }
+    .phone--tilt { transform: rotate(-2deg); }
+    .phone-glow { position: absolute; inset: -34px; z-index: -1; filter: blur(46px); opacity: 0.7;
+      background: radial-gradient(ellipse at center, rgba(108,107,255,0.4), transparent 62%); }
+    /* placeholder shown until a screenshot is dropped in */
+    .shot-ph { aspect-ratio: 1260 / 2736; border-radius: 38px; display: flex; align-items: center; justify-content: center;
+      background: linear-gradient(160deg, #141b2c, #0c1120); color: var(--muted-2); font-size: 0.8rem; text-align: center; padding: 20px; }
 
-    .phone img {
-      display: block;
-      width: 100%;
-      height: auto;
-      border-radius: 42px;
-    }
-
-    .phone--hero {
-      max-width: 340px;
-      transform: rotate(-2deg);
-    }
-
-    .phone-glow {
-      position: absolute;
-      inset: -40px;
-      z-index: -1;
-      background: radial-gradient(ellipse at center, rgba(139,92,246,0.35), transparent 60%);
-      filter: blur(40px);
-      opacity: 0.7;
-    }
-
-    /* Stats strip */
-    .stats {
-      display: grid;
-      grid-template-columns: repeat(4, 1fr);
-      gap: 0;
-      padding: 32px 0;
-      border-top: 1px solid var(--border);
-      border-bottom: 1px solid var(--border);
-      margin-bottom: 60px;
-    }
-
-    .stat {
-      padding: 0 24px;
-      border-right: 1px solid var(--border);
-      text-align: center;
-    }
-
+    /* ---------- Stats ---------- */
+    .stats { display: grid; grid-template-columns: repeat(5, 1fr); border-top: 1px solid var(--border); border-bottom: 1px solid var(--border); }
+    .stat { padding: 26px 16px; text-align: center; border-right: 1px solid var(--border); }
     .stat:last-child { border-right: none; }
+    .stat-num { font-family: var(--display); font-weight: 700; font-size: clamp(1.7rem, 3vw, 2.35rem); line-height: 1; letter-spacing: -0.02em;
+      background: var(--brand-sweep); -webkit-background-clip: text; background-clip: text; color: transparent; margin-bottom: 7px; }
+    .stat-label { font-size: 0.76rem; color: var(--muted); letter-spacing: 0.05em; text-transform: uppercase; }
+    @media (max-width: 760px){ .stats { grid-template-columns: repeat(2,1fr); } .stat:nth-child(2n){border-right:none;} .stat { border-bottom: 1px solid var(--border);} .stat:nth-last-child(-n+1){border-bottom:none;} }
 
-    .stat-num {
-      font-family: var(--display);
-      font-size: clamp(1.8rem, 3vw, 2.4rem);
-      font-weight: 600;
-      letter-spacing: -0.02em;
-      line-height: 1;
-      background: var(--gradient);
-      -webkit-background-clip: text;
-      background-clip: text;
-      color: transparent;
-      margin-bottom: 6px;
+    /* ---------- Goals triptych ---------- */
+    .band { padding: 92px 0; }
+    .band-head { text-align: center; max-width: 640px; margin: 0 auto 52px; }
+    .band-head h2 { font-family: var(--display); font-weight: 700; font-size: clamp(2rem, 3.8vw, 2.9rem); letter-spacing: -0.028em; line-height: 1.05; margin: 16px 0 14px; }
+    .band-head p { color: var(--muted); font-size: 1.06rem; margin: 0; }
+    .goals { display: grid; grid-template-columns: repeat(3,1fr); gap: 16px; }
+    .goal { padding: 30px 26px; border-radius: var(--radius); background: linear-gradient(180deg, var(--grad-card-top), var(--grad-card-bot)); border: 1px solid var(--border); position: relative; overflow: hidden; }
+    .goal::before { content:""; position:absolute; inset:0 0 auto 0; height:2px; background: var(--accent, var(--brand-sweep)); opacity:.85; }
+    .goal-badge { width: 46px; height: 46px; border-radius: 14px; display: grid; place-items: center; margin-bottom: 18px; background: rgba(255,255,255,0.04); border: 1px solid var(--border-strong); }
+    .goal-badge svg { width: 24px; height: 24px; fill: none; stroke: var(--accent-solid, #fff); stroke-width: 1.7; stroke-linecap: round; stroke-linejoin: round; }
+    .goal h3 { font-family: var(--display); font-weight: 700; font-size: 1.28rem; margin: 0 0 8px; letter-spacing: -0.01em; }
+    .goal p { color: var(--muted); font-size: 0.97rem; margin: 0; }
+    @media (max-width: 820px){ .goals { grid-template-columns: 1fr; } }
+
+    /* ---------- Skills strip ---------- */
+    .skills-grid { display: grid; grid-template-columns: repeat(4,1fr); gap: 16px; }
+    .skill { padding: 26px 22px; border-radius: var(--radius-sm); background: var(--card); border: 1px solid var(--border); transition: transform .25s, border-color .25s, background .25s; }
+    .skill:hover { transform: translateY(-3px); border-color: var(--border-strong); background: var(--elevated); }
+    .skill-ico { width: 44px; height: 44px; border-radius: 13px; display: grid; place-items: center; margin-bottom: 16px; background: var(--brand-sweep); font-family: var(--display); font-weight: 700; font-size: 1.2rem; color: #fff; box-shadow: 0 6px 16px rgba(64,112,255,0.3); }
+    .skill h3 { font-family: var(--display); font-weight: 700; font-size: 1.12rem; margin: 0 0 7px; letter-spacing: -0.01em; }
+    .skill p { margin: 0; color: var(--muted); font-size: 0.9rem; line-height: 1.5; }
+    @media (max-width: 900px){ .skills-grid { grid-template-columns: repeat(2,1fr); } }
+    @media (max-width: 520px){ .skills-grid { grid-template-columns: 1fr; } }
+
+    /* ---------- Feature rows ---------- */
+    .feature { display: grid; grid-template-columns: 1fr 1fr; gap: 72px; align-items: center; padding: 84px 0; }
+    .feature + .feature { border-top: 1px solid var(--border); }
+    .feature--rev .f-text { order: 2; }
+    .feature h2 { font-family: var(--display); font-weight: 700; font-size: clamp(1.9rem, 3.6vw, 2.7rem); line-height: 1.06; letter-spacing: -0.025em; margin: 16px 0 18px; }
+    .feature p.f-lede { color: var(--muted); font-size: 1.07rem; margin: 0 0 26px; max-width: 500px; }
+    .points { list-style: none; padding: 0; margin: 0; }
+    .points li { display: flex; gap: 13px; padding: 11px 0; font-size: 0.99rem; border-bottom: 1px solid var(--border); }
+    .points li:last-child { border-bottom: none; }
+    .points li::before { content:""; flex-shrink: 0; width: 7px; height: 7px; margin-top: 9px; border-radius: 50%; background: var(--brand-sweep); box-shadow: 0 0 7px rgba(120,120,255,0.5); }
+    .f-media { display: flex; justify-content: center; position: relative; }
+    .f-media::before { content:""; position: absolute; inset: -18px; z-index: -1; filter: blur(44px);
+      background: radial-gradient(ellipse at center, var(--glow, rgba(64,112,255,0.22)), transparent 66%); }
+    @media (max-width: 900px){ .feature { grid-template-columns: 1fr; gap: 44px; text-align: center; padding: 62px 0; }
+      .feature--rev .f-text { order: 0; } .points { max-width: 420px; margin: 0 auto; } .points li { text-align: left; }
+      .feature p.f-lede { margin-left:auto; margin-right:auto; } .cta-row { justify-content: center; } }
+
+    /* ---------- Duo phones — two overlapping screens, responsive ---------- */
+    .duo { display: grid; place-items: center; padding: 26px 0; }
+    .duo .phone { grid-area: 1 / 1; width: min(64%, 236px); padding: 7px; border-radius: 34px; }
+    .duo .phone img { border-radius: 27px; }
+    .duo .phone--back { transform: translate(27%, -7%) rotate(4deg) scale(0.93); z-index: 1;
+      box-shadow: 0 28px 56px rgba(0,0,0,0.5), 0 0 0 1px rgba(255,255,255,0.05); }
+    .duo .phone--front { transform: translate(-25%, 8%) rotate(-3deg); z-index: 2; }
+    @media (max-width: 900px){ .duo .phone { width: min(58%, 212px); } }
+    @media (max-width: 420px){ .duo .phone { width: 58%; }
+      .duo .phone--back { transform: translate(28%, -6%) rotate(4deg) scale(0.9); }
+      .duo .phone--front { transform: translate(-26%, 8%) rotate(-3deg); } }
+
+    /* ---------- Progress showcase — two larger phones, gently staggered ---------- */
+    .showcase { position: relative; display: flex; justify-content: center; align-items: flex-start; flex-wrap: wrap; padding: 40px 0 8px; }
+    .showcase::before { content:""; position:absolute; inset: 6% 12%; z-index:-1; filter: blur(52px);
+      background: radial-gradient(ellipse at center, rgba(61,204,121,0.15), transparent 70%); }
+    .showcase .phone { width: min(46%, 298px); padding: 8px; border-radius: 42px; }
+    .showcase .phone img { border-radius: 34px; }
+    .showcase .phone:first-child { transform: rotate(-2.5deg); margin-right: -20px; z-index: 2; }
+    .showcase .phone:last-child { transform: rotate(2.5deg); margin-left: -20px; margin-top: 34px; z-index: 1; }
+    @media (max-width: 760px){
+      .showcase { gap: 26px; }
+      .showcase .phone { width: min(76%, 300px); margin: 0 !important; transform: none !important; }
     }
 
-    .stat-label {
-      font-size: 0.82rem;
-      color: var(--muted);
-      letter-spacing: 0.04em;
-      text-transform: uppercase;
-    }
+    /* ---------- Apple Watch strip ---------- */
+    .pro-tag { display: inline-block; margin-left: 9px; padding: 3px 9px; border-radius: 999px;
+      font-size: 0.6rem; font-weight: 800; letter-spacing: 0.1em; color: #fff; background: var(--brand-sweep);
+      vertical-align: middle; box-shadow: 0 3px 10px rgba(108,107,255,0.4); }
+    .watch-strip { display: flex; flex-wrap: wrap; justify-content: center; align-items: center; gap: 22px 18px; padding: 48px 0 8px; position: relative; }
+    .watch-strip::before { content:""; position:absolute; inset: 14% 8%; z-index:-1; filter: blur(56px);
+      background: radial-gradient(ellipse at center, rgba(64,112,255,0.16), transparent 72%); }
+    .watch { position: relative; width: 150px; padding: 9px 8px; border-radius: 44px;
+      background: linear-gradient(158deg, #34373e 0%, #0a0b0e 100%);
+      box-shadow: 0 24px 46px rgba(0,0,0,0.52), 0 0 0 1px rgba(255,255,255,0.07), inset 0 0 0 1px rgba(255,255,255,0.05);
+      transition: transform .25s ease; }
+    .watch img { display: block; width: 100%; border-radius: 36px; }
+    .watch:nth-child(odd) { transform: rotate(-2deg); }
+    .watch:nth-child(even) { transform: rotate(2deg); }
+    .watch:hover { transform: translateY(-4px) rotate(0deg); }
+    @media (max-width: 520px){ .watch { width: 134px; } }
 
-    /* Feature sections */
-    .feature {
-      display: grid;
-      grid-template-columns: 1fr 1fr;
-      gap: 80px;
-      align-items: center;
-      padding: 88px 0;
-      position: relative;
-    }
+    /* ---------- Extras grid ---------- */
+    .extras { padding: 92px 0 40px; border-top: 1px solid var(--border); }
+    .egrid { display: grid; grid-template-columns: repeat(3,1fr); gap: 16px; }
+    .ecard { padding: 26px; border-radius: var(--radius-sm); background: var(--card); border: 1px solid var(--border); transition: transform .25s, border-color .25s, background .25s; position: relative; overflow: hidden; }
+    .ecard::before { content:""; position:absolute; top:0; left:0; right:0; height:1px; background: var(--brand-sweep); opacity:0; transition:opacity .3s; }
+    .ecard:hover { transform: translateY(-3px); border-color: var(--border-strong); background: var(--elevated); }
+    .ecard:hover::before { opacity: 1; }
+    .eicon { width: 40px; height: 40px; border-radius: 11px; display: grid; place-items: center; margin-bottom: 16px; background: var(--brand-sweep-soft); border: 1px solid var(--border-strong); }
+    .eicon svg { width: 20px; height: 20px; fill: none; stroke: #dfe6f5; stroke-width: 1.6; stroke-linecap: round; stroke-linejoin: round; }
+    .ecard strong { font-family: var(--display); display: block; font-size: 1.08rem; font-weight: 700; margin-bottom: 7px; letter-spacing: -0.01em; }
+    .ecard p { margin: 0; color: var(--muted); font-size: 0.93rem; line-height: 1.55; }
+    @media (max-width: 860px){ .egrid { grid-template-columns: 1fr; } }
 
-    .feature + .feature {
-      border-top: 1px solid var(--border);
-    }
+    /* ---------- Final CTA ---------- */
+    .final { margin: 96px 0 0; padding: 78px 40px; border-radius: 34px; text-align: center; position: relative; overflow: hidden;
+      background: radial-gradient(ellipse at top, rgba(108,107,255,0.24), transparent 62%), radial-gradient(ellipse at bottom right, rgba(61,204,121,0.12), transparent 64%), rgba(255,255,255,0.025);
+      border: 1px solid var(--border); }
+    .final::before { content:""; position:absolute; top:-1px; left:22%; right:22%; height:1px; background: linear-gradient(90deg, transparent, rgba(150,150,255,0.7), transparent); }
+    .final h2 { font-family: var(--display); font-weight: 700; font-size: clamp(2.1rem, 4.4vw, 3.1rem); letter-spacing: -0.03em; line-height: 1.05; margin: 0 0 16px; }
+    .final p { color: var(--muted); max-width: 520px; margin: 0 auto 30px; font-size: 1.06rem; }
 
-    .feature--reverse .feature-text { order: 2; }
-
-    .feature-eyebrow {
-      font-family: var(--body);
-      display: inline-block;
-      font-size: 0.78rem;
-      font-weight: 600;
-      letter-spacing: 0.12em;
-      text-transform: uppercase;
-      color: var(--c-violet);
-      margin-bottom: 18px;
-    }
-
-    .feature-text h2 {
-      font-family: var(--display);
-      font-size: clamp(2rem, 3.8vw, 2.9rem);
-      margin: 0 0 22px;
-      line-height: 1.05;
-      letter-spacing: -0.025em;
-      font-weight: 600;
-    }
-
-    .feature-text > p {
-      color: var(--muted);
-      font-size: 1.08rem;
-      margin: 0 0 28px;
-      max-width: 520px;
-    }
-
-    .feature-points {
-      list-style: none;
-      padding: 0;
-      margin: 0;
-    }
-
-    .feature-points li {
-      display: flex;
-      gap: 14px;
-      padding: 11px 0;
-      color: var(--text);
-      font-size: 0.99rem;
-      border-bottom: 1px solid var(--border);
-    }
-
-    .feature-points li:last-child { border-bottom: none; }
-
-    .feature-points li::before {
-      content: "";
-      flex-shrink: 0;
-      width: 7px;
-      height: 7px;
-      border-radius: 50%;
-      background: var(--gradient);
-      margin-top: 10px;
-      box-shadow: 0 0 6px rgba(139,92,246,0.4);
-    }
-
-    .feature-img {
-      display: flex;
-      justify-content: center;
-      position: relative;
-    }
-
-    .feature-img::before {
-      content: "";
-      position: absolute;
-      inset: -20px;
-      z-index: -1;
-      background: radial-gradient(ellipse at center, rgba(96,165,250,0.18), transparent 65%);
-      filter: blur(40px);
-    }
-
-    .feature--alt .feature-img::before {
-      background: radial-gradient(ellipse at center, rgba(251,191,36,0.16), transparent 65%);
-    }
-
-    .feature--alt2 .feature-img::before {
-      background: radial-gradient(ellipse at center, rgba(251,113,133,0.18), transparent 65%);
-    }
-
-    /* Extras grid */
-    .extras {
-      padding: 96px 0 32px;
-      border-top: 1px solid var(--border);
-    }
-
-    .extras-header {
-      text-align: center;
-      margin-bottom: 56px;
-    }
-
-    .extras-header h2 {
-      font-family: var(--display);
-      font-size: clamp(2rem, 3.6vw, 2.8rem);
-      margin: 0 0 16px;
-      letter-spacing: -0.025em;
-      font-weight: 600;
-    }
-
-    .extras-header p {
-      color: var(--muted);
-      max-width: 580px;
-      margin: 0 auto;
-      font-size: 1.05rem;
-    }
-
-    .extras-grid {
-      display: grid;
-      grid-template-columns: repeat(3, 1fr);
-      gap: 16px;
-    }
-
-    .extra-card {
-      padding: 28px;
-      border-radius: 22px;
-      background: var(--card);
-      border: 1px solid var(--border);
-      transition: transform 0.25s ease, border-color 0.25s ease, background 0.25s ease;
-      position: relative;
-      overflow: hidden;
-    }
-
-    .extra-card::before {
-      content: "";
-      position: absolute;
-      top: 0;
-      left: 0;
-      right: 0;
-      height: 1px;
-      background: var(--gradient);
-      opacity: 0;
-      transition: opacity 0.3s ease;
-    }
-
-    .extra-card:hover {
-      transform: translateY(-3px);
-      border-color: var(--border-strong);
-      background: var(--card-hover);
-    }
-
-    .extra-card:hover::before { opacity: 1; }
-
-    .extra-icon {
-      width: 40px;
-      height: 40px;
-      border-radius: 11px;
-      background: var(--gradient-soft);
-      border: 1px solid var(--border-strong);
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      margin-bottom: 18px;
-    }
-
-    .extra-icon svg {
-      width: 20px;
-      height: 20px;
-      stroke: var(--text);
-      fill: none;
-      stroke-width: 1.6;
-      stroke-linecap: round;
-      stroke-linejoin: round;
-    }
-
-    .extra-card strong {
-      font-family: var(--display);
-      display: block;
-      font-size: 1.1rem;
-      font-weight: 600;
-      letter-spacing: -0.01em;
-      margin-bottom: 8px;
-    }
-
-    .extra-card p {
-      margin: 0;
-      color: var(--muted);
-      font-size: 0.95rem;
-      line-height: 1.55;
-    }
-
-    /* Final CTA */
-    .final-cta {
-      margin-top: 96px;
-      padding: 80px 40px;
-      border-radius: 36px;
-      background:
-        radial-gradient(ellipse at top, rgba(139,92,246,0.18), transparent 65%),
-        radial-gradient(ellipse at bottom right, rgba(251,191,36,0.12), transparent 65%),
-        rgba(255,255,255,0.025);
-      border: 1px solid var(--border);
-      text-align: center;
-      position: relative;
-      overflow: hidden;
-    }
-
-    .final-cta::before {
-      content: "";
-      position: absolute;
-      top: -1px;
-      left: 20%;
-      right: 20%;
-      height: 1px;
-      background: linear-gradient(90deg, transparent, rgba(139,92,246,0.6), transparent);
-    }
-
-    .final-cta h2 {
-      font-family: var(--display);
-      font-size: clamp(2.2rem, 4.5vw, 3.2rem);
-      margin: 0 0 18px;
-      letter-spacing: -0.03em;
-      line-height: 1.05;
-      font-weight: 600;
-    }
-
-    .final-cta p {
-      color: var(--muted);
-      max-width: 540px;
-      margin: 0 auto 32px;
-      font-size: 1.08rem;
-    }
-
-    /* Footer */
-    footer {
-      margin-top: 64px;
-      padding-top: 36px;
-      border-top: 1px solid var(--border);
-      color: var(--muted-2);
-      font-size: 0.9rem;
-      display: flex;
-      justify-content: space-between;
-      flex-wrap: wrap;
-      gap: 16px;
-      align-items: center;
-    }
-
-    footer a {
-      color: var(--muted);
-      text-decoration: none;
-      transition: color 0.2s ease;
-    }
-
+    /* ---------- Footer ---------- */
+    footer { margin-top: 70px; padding: 34px 0 60px; border-top: 1px solid var(--border); display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 16px; color: var(--muted-2); font-size: 0.9rem; }
+    .foot-brand { display: flex; align-items: center; gap: 10px; }
+    .foot-brand img { width: 24px; height: 24px; border-radius: 6px; }
+    footer a { color: var(--muted); text-decoration: none; transition: color .2s; }
     footer a:hover { color: var(--text); }
+    @media (max-width: 640px){ footer { flex-direction: column; text-align: center; } }
 
-    .footer-brand {
-      display: flex;
-      align-items: center;
-      gap: 10px;
-    }
-
-    .footer-brand img {
-      width: 24px;
-      height: 24px;
-      border-radius: 6px;
-    }
-
-    /* Responsive */
-    @media (max-width: 920px) {
-      .wrap { padding: 20px 20px 56px; }
-
-      .header { margin-bottom: 32px; }
-
-      .hero {
-        grid-template-columns: 1fr;
-        gap: 56px;
-        padding: 24px 0 56px;
-        text-align: center;
-      }
-
-      .hero-sub {
-        margin-left: auto;
-        margin-right: auto;
-      }
-
-      .hero-cta { justify-content: center; }
-
-      .hero-right { min-height: auto; }
-
-      .phone--hero { transform: rotate(0deg); }
-
-      .stats {
-        grid-template-columns: repeat(2, 1fr);
-        gap: 20px 0;
-      }
-
-      .stat {
-        padding: 8px 16px;
-      }
-
-      .stat:nth-child(2n) { border-right: none; }
-
-      .feature {
-        grid-template-columns: 1fr;
-        gap: 48px;
-        padding: 64px 0;
-        text-align: center;
-      }
-
-      .feature--reverse .feature-text { order: 0; }
-
-      .feature-points {
-        max-width: 420px;
-        margin: 0 auto;
-      }
-
-      .feature-points li { text-align: left; }
-
-      .feature-text > p {
-        margin-left: auto;
-        margin-right: auto;
-      }
-
-      .extras {
-        padding: 64px 0 16px;
-      }
-
-      .extras-grid {
-        grid-template-columns: 1fr;
-      }
-
-      .final-cta {
-        padding: 56px 28px;
-        margin-top: 64px;
-      }
-
-      footer {
-        flex-direction: column;
-        text-align: center;
-      }
-    }
-
-    @media (max-width: 480px) {
-      .hero h1 {
-        font-size: clamp(2.4rem, 11vw, 3.4rem);
-      }
-    }
-
-    /* Reduced motion */
-    @media (prefers-reduced-motion: reduce) {
-      * {
-        animation-duration: 0.01ms !important;
-        transition-duration: 0.01ms !important;
-      }
-      .phone--hero { transform: none; }
-    }
+    @media (prefers-reduced-motion: reduce) { * { animation-duration: .01ms !important; transition-duration: .01ms !important; } .phone--tilt { transform: none; } }
   </style>
 </head>
 
 <body>
-  <div class="bg-ambient"></div>
-  <div class="bg-grain"></div>
+  <div class="ambient"></div>
+  <div class="grain"></div>
+
+  <!-- NAV -->
+  <nav class="nav">
+    <div class="nav-inner">
+      <a class="brand" href="index.html">
+        <span>Tiqan</span>
+      </a>
+      <div class="nav-links">
+        <a href="#features">Features</a>
+        <a href="#goals">Goals</a>
+        <a href="#skills">Skills</a>
+        <a href="#watch">Watch</a>
+        <a href="privacy.html">Privacy</a>
+        <a class="nav-cta" href="https://apps.apple.com/us/app/tiqan/id6761499537" target="_blank" rel="noopener noreferrer">Download</a>
+      </div>
+    </div>
+  </nav>
 
   <div class="wrap">
-    <header class="header">
-      <a class="brand" href="index.html">
-        <img src="tiqan-logo.png" alt="Tiqan logo">
-        <span class="brand-name">Tiqan</span>
-      </a>
-      <nav class="nav">
-        <a href="privacy.html">Privacy</a>
-        <a href="https://apps.apple.com/us/app/tiqan/id6761499537" target="_blank" rel="noopener noreferrer">App Store</a>
-      </nav>
-    </header>
-
-    <main>
-      <!-- HERO -->
-      <section class="hero">
-        <div class="hero-left">
-          <div class="hero-eyebrow">For iPhone &amp; Apple Watch</div>
-          <h1>Calisthenics,<br><span class="grad-text">calibrated.</span></h1>
-          <p class="hero-sub">
-            Adaptive training that meets you where you are. Build strength, track real progress, and always know exactly what to do next.
-          </p>
-          <div class="hero-cta">
-            <a class="appstore-link" href="https://apps.apple.com/us/app/tiqan/id6761499537" target="_blank" rel="noopener noreferrer">
-              <img src="appstorebadge.svg" alt="Download on the App Store">
-            </a>
-          </div>
-          <p class="hero-note">Free to start. Premium unlocks adaptive programs and advanced insights.</p>
-        </div>
-        <div class="hero-right">
-          <div class="phone-glow"></div>
-          <div class="phone phone--hero">
-            <img src="screen-today.png" alt="Tiqan today screen showing workout progress">
-          </div>
-        </div>
-      </section>
-
-      <!-- STATS -->
-      <section class="stats">
-        <div class="stat">
-          <div class="stat-num">6</div>
-          <div class="stat-label">Progression Levels</div>
-        </div>
-        <div class="stat">
-          <div class="stat-num">180+</div>
-          <div class="stat-label">Exercises</div>
-        </div>
-        <div class="stat">
-          <div class="stat-num">3 &amp; 6</div>
-          <div class="stat-label">Day Splits</div>
-        </div>
-        <div class="stat">
-          <div class="stat-num">iOS 26</div>
-          <div class="stat-label">Native Build</div>
-        </div>
-      </section>
-
-      <!-- FEATURE 1 — Adaptive Programs -->
-      <section class="feature">
-        <div class="feature-text">
-          <span class="feature-eyebrow">Adaptive Programs</span>
-          <h2>A program that meets you where you are.</h2>
-          <p>A four-minute assessment sets your starting level for push, pull, and legs. After that, every session auto-progresses, holds, or regresses based on what you actually did.</p>
-          <ul class="feature-points">
-            <li>Six progression levels — Foundation to Elite</li>
-            <li>Equipment-aware — only programs what you can do</li>
-            <li>Auto-adjusts after every session, not every month</li>
-            <li>Choose 3-day Full Body or 6-day Push / Pull / Legs</li>
-          </ul>
-        </div>
-        <div class="feature-img">
-          <div class="phone">
-            <img src="screen-program-ready.png" alt="Program ready screen showing intermediate level and tailored workout preview">
-          </div>
-        </div>
-      </section>
-
-      <!-- FEATURE 2 — Workout Experience -->
-      <section class="feature feature--reverse feature--alt">
-        <div class="feature-text">
-          <span class="feature-eyebrow">In the Workout</span>
-          <h2>Every set, dialed in.</h2>
-          <p>Tempo guidance, smart rest timers, RPE per set, and form quality tracking. Pause and resume from anywhere — Dynamic Island and Lock Screen Live Activities keep your session visible without unlocking your phone.</p>
-          <ul class="feature-points">
-            <li>Tempo cues and Get Ready countdown for time-based holds</li>
-            <li>Form quality and RPE captured per set</li>
-            <li>Smart rest timer auto-starts after each set</li>
-            <li>Live Activities, Dynamic Island, and home-screen widgets</li>
-          </ul>
-        </div>
-        <div class="feature-img">
-          <div class="phone">
-            <img src="screen-workout.png" alt="Active workout screen with exercise timer">
-          </div>
-        </div>
-      </section>
-
-      <!-- FEATURE 3 — Real Progress -->
-      <section class="feature feature--alt2">
-        <div class="feature-text">
-          <span class="feature-eyebrow">Honest Insights</span>
-          <h2>Track real progress, not vanity numbers.</h2>
-          <p>Personal records with timestamps. Plateau detection that surfaces stalled movements before frustration sets in. Patterns from your own data — "Your strongest day is Tuesday" — not generic tips.</p>
-          <ul class="feature-points">
-            <li>Personal records dated, with before / after celebrations</li>
-            <li>Training Load chart with 6-week baseline reference</li>
-            <li>Plateau detection flags stalls after 5+ sessions</li>
-            <li>Movement balance with Push / Pull / Legs warnings</li>
-          </ul>
-        </div>
-        <div class="feature-img">
-          <div class="phone">
-            <img src="screen-complete.png" alt="Workout complete screen with new personal record">
-          </div>
-        </div>
-      </section>
-
-      <!-- FEATURE 4 — Programs you build -->
-      <section class="feature feature--reverse">
-        <div class="feature-text">
-          <span class="feature-eyebrow">Flexible</span>
-          <h2>Programs you build, programs we build.</h2>
-          <p>Follow an adaptive program built from your assessment, pick a pre-built template, or design your own with drag-and-drop scheduling. Plus Quick Workouts for one-off sessions outside your program.</p>
-          <ul class="feature-points">
-            <li>Adaptive, template, or fully custom programs</li>
-            <li>Drag exercises to reorder, tap rest days to fill them in</li>
-            <li>Quick Workouts for one-off sessions any time</li>
-            <li>Searchable library with form cues and common mistakes</li>
-          </ul>
-        </div>
-        <div class="feature-img">
-          <div class="phone">
-            <img src="screen-programs.png" alt="Programs screen with active program and quick workouts">
-          </div>
-        </div>
-      </section>
-
-      <!-- FEATURE 5 — Exercise Library -->
-      <section class="feature feature--alt">
-        <div class="feature-text">
-          <span class="feature-eyebrow">Library &amp; Muscle Map</span>
-          <h2>Every movement, every muscle.</h2>
-          <p>Browse 188 illustrated exercises with full progression chains, form cues, and common mistakes. A shaded body map shows exactly which muscles each movement works — tap a muscle to filter the library, flip from front to back, and see every workout mapped onto the body.</p>
-          <ul class="feature-points">
-            <li>188 exercises across push, pull, legs, and core</li>
-            <li>Tap-a-muscle filter with front / back body map</li>
-            <li>Target-muscle maps in every workout preview and post-workout summary</li>
-            <li>Progression chains from Foundation to Elite, form cues per movement</li>
-          </ul>
-        </div>
-        <div class="feature-img">
-          <div class="phone">
-            <img src="screen-library.png" alt="Muscle map filter — tap a muscle to find matching exercises, with front and back body views">
-          </div>
-        </div>
-      </section>
-
-      <!-- EXTRAS GRID -->
-      <section class="extras">
-        <div class="extras-header">
-          <h2>More than a workout logger.</h2>
-          <p>Built natively for iOS 26 — every detail, every interaction, every device.</p>
-        </div>
-
-        <div class="extras-grid">
-          <div class="extra-card">
-            <div class="extra-icon">
-              <svg viewBox="0 0 24 24"><rect x="6" y="3" width="12" height="18" rx="2"/><circle cx="12" cy="12" r="3"/><path d="M9 1.5h6M9 22.5h6"/></svg>
-            </div>
-            <strong>Apple Watch, first-class</strong>
-            <p>Run full workouts from your wrist. iPhone mirrors live progress so you can leave it across the room.</p>
-          </div>
-
-          <div class="extra-card">
-            <div class="extra-icon">
-              <svg viewBox="0 0 24 24"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/></svg>
-            </div>
-            <strong>Apple Health sync</strong>
-            <p>Workouts, heart rate, and calories sync to Apple Health automatically. Read-once authorization, no nagging.</p>
-          </div>
-
-          <div class="extra-card">
-            <div class="extra-icon">
-              <svg viewBox="0 0 24 24"><path d="M18 10h-1.26A8 8 0 1 0 9 20h9a5 5 0 0 0 0-10z"/></svg>
-            </div>
-            <strong>iCloud sync</strong>
-            <p>Workouts, programs, and progression state sync across all your devices via SwiftData and CloudKit.</p>
-          </div>
-
-          <div class="extra-card">
-            <div class="extra-icon">
-              <svg viewBox="0 0 24 24"><rect x="3" y="11" width="18" height="11" rx="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/></svg>
-            </div>
-            <strong>Private by default</strong>
-            <p>No third-party tracking. Your training data stays between you and Apple. Manage your subscription in-app.</p>
-          </div>
-
-          <div class="extra-card">
-            <div class="extra-icon">
-              <svg viewBox="0 0 24 24"><path d="M12 2l2.6 7.6H22l-6.2 4.6 2.4 7.4-6.2-4.6-6.2 4.6 2.4-7.4L2 9.6h7.4z"/></svg>
-            </div>
-            <strong>Native iOS feel</strong>
-            <p>Dynamic Type, VoiceOver, haptics, Reduce Motion support, and full dark / light mode. Built for the platform.</p>
-          </div>
-
-          <div class="extra-card">
-            <div class="extra-icon">
-              <svg viewBox="0 0 24 24"><path d="M3 12h4l3-9 4 18 3-9h4"/></svg>
-            </div>
-            <strong>Recovery, honestly</strong>
-            <p>A composite of rest, recent RPE, and frequency. Called "Recovery" — we won't pretend to read your HRV.</p>
-          </div>
-        </div>
-      </section>
-
-      <!-- FINAL CTA -->
-      <section class="final-cta">
-        <h2>Ready to train with purpose?</h2>
-        <p>Start free. Unlock adaptive programs and advanced insights with Tiqan Pro.</p>
-        <a class="appstore-link" href="https://apps.apple.com/us/app/tiqan/id6761499537" target="_blank" rel="noopener noreferrer">
+    <!-- HERO -->
+    <section class="hero">
+      <img class="hero-mark" src="tiqan-mark.png" alt="Tiqan">
+      <span class="eyebrow">iPhone · iPad · Mac · Apple Watch</span>
+      <h1>Train smarter.<br><span class="grad">Get stronger.</span></h1>
+      <p class="lede">Tiqan is an adaptive calisthenics coach. Answer a few quick questions and it builds a bodyweight plan that levels up — or eases back — based on how each session actually goes.</p>
+      <div class="cta-row">
+        <a class="appstore" href="https://apps.apple.com/us/app/tiqan/id6761499537" target="_blank" rel="noopener noreferrer">
           <img src="appstorebadge.svg" alt="Download on the App Store">
         </a>
-      </section>
-    </main>
+      </div>
+      <p class="hero-note"><b>Free to start.</b> No account required. Your data stays yours.</p>
+      <div class="hero-media">
+        <div class="phone-glow"></div>
+        <div class="phone phone--tilt">
+          <img src="screen-today.png" alt="Tiqan Today screen — your workout for the day with a readiness score and muscle map">
+        </div>
+      </div>
+    </section>
 
+    <!-- STATS -->
+    <section class="stats">
+      <div class="stat"><div class="stat-num">203</div><div class="stat-label">Exercises</div></div>
+      <div class="stat"><div class="stat-num">6</div><div class="stat-label">Strength Levels</div></div>
+      <div class="stat"><div class="stat-num">3</div><div class="stat-label">Goals</div></div>
+      <div class="stat"><div class="stat-num">4</div><div class="stat-label">Skills</div></div>
+      <div class="stat"><div class="stat-num">4</div><div class="stat-label">Apple Platforms</div></div>
+    </section>
+
+    <!-- FEATURE: ADAPTIVE -->
+    <section class="feature" id="features">
+      <div class="f-text">
+        <span class="section-eyebrow">Adaptive Programs</span>
+        <h2>A plan that builds itself — and adjusts every session.</h2>
+        <p class="f-lede">No spreadsheets, no guessing which progression comes next. Tiqan writes the program from your goal and equipment, then quietly moves it up or down based on your real performance.</p>
+        <ul class="points">
+          <li>Push, pull and legs each progress on their own — two strong sessions level you up, two rough ones ease you back</li>
+          <li>Six strength levels per movement, Foundation to Elite, with harder variations swapped in as you climb</li>
+          <li>Equipment-aware — floor only, a pull-up bar, or a full bar-and-rings setup (with a real no-bar pull path)</li>
+          <li>Choose a 3-day full-body or 6-day push / pull / legs split</li>
+        </ul>
+      </div>
+      <div class="f-media" style="--glow: rgba(64,112,255,0.26);">
+        <div class="phone">
+          <img src="screen-plan.png" alt="Tiqan adaptive program overview" onerror="this.parentNode.innerHTML='&lt;div class=\'shot-ph\'&gt;Adaptive plan&lt;/div&gt;'">
+        </div>
+      </div>
+    </section>
+
+    <!-- GOALS TRIPTYCH -->
+    <section class="band" id="goals">
+      <div class="band-head">
+        <span class="section-eyebrow">One app, three goals</span>
+        <h2>Keep a plan for everything you're chasing.</h2>
+        <p>Build Strength, Master a Skill, and Move Better — hold all three at once and switch between them with a tap.</p>
+      </div>
+      <div class="goals">
+        <div class="goal" style="--accent: linear-gradient(90deg,#4070FF,#6698FF); --accent-solid:#6698FF;">
+          <div class="goal-badge"><svg viewBox="0 0 24 24"><path d="M4 12h2M18 12h2M7 8v8M17 8v8M7 12h10"/><rect x="2.5" y="9.5" width="2" height="5" rx="1"/><rect x="19.5" y="9.5" width="2" height="5" rx="1"/></svg></div>
+          <h3>Build Strength</h3>
+          <p>Get stronger with progressive calisthenics that climbs the ladder rung by rung.</p>
+        </div>
+        <div class="goal" style="--accent: linear-gradient(90deg,#B36BFF,#FF99EE); --accent-solid:#C77BFF;">
+          <div class="goal-badge"><svg viewBox="0 0 24 24"><circle cx="12" cy="5" r="2.4"/><path d="M12 7.5v6M12 10l-4.5 2M12 10l4.5 2M9 20l3-6.5 3 6.5"/></svg></div>
+          <h3>Master a Skill</h3>
+          <p>Handstand, front lever, planche or muscle-up — a full progression to the real thing.</p>
+        </div>
+        <div class="goal" style="--accent: linear-gradient(90deg,#25B36A,#3DCC79); --accent-solid:#3DCC79;">
+          <div class="goal-badge"><svg viewBox="0 0 24 24"><path d="M4 15c3-1 5-4 8-4s5 3 8 2M4 10c3-1 5-4 8-4s5 3 8 2"/></svg></div>
+          <h3>Move Better</h3>
+          <p>Mobility, flexibility and functional movement for a body that feels good to train.</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- FEATURE: IN THE WORKOUT -->
+    <section class="feature feature--rev" id="workout">
+      <div class="f-text">
+        <span class="section-eyebrow">In the Workout</span>
+        <h2>Guided sets, honest feedback, no nagging.</h2>
+        <p class="f-lede">Timed and rep-based sets, rest timers, get-ready countdowns and tempo cues walk you through the session. After a set you can log how it felt — it's optional, and it quietly shapes what comes next.</p>
+        <ul class="points">
+          <li>Rate Form, Tempo and Effort per set — only the toughest signal affects your progression</li>
+          <li>Autoregulation that respects your day: stop an exercise early when a set drops off, or finish the whole session lighter on a rough day</li>
+          <li>Live Activity and Dynamic Island keep your set and rest timer on the Lock Screen</li>
+          <li>Get interrupted? Your workout is restored exactly where you left off</li>
+        </ul>
+      </div>
+      <div class="f-media duo" style="--glow: rgba(251,113,133,0.22);">
+        <div class="phone phone--back">
+          <img src="screen-workout-rate.png" alt="Tiqan rest screen with Form, Tempo and Effort ratings">
+        </div>
+        <div class="phone phone--front">
+          <img src="screen-workout-active.png" alt="Tiqan active workout screen — exercise demo, reps, and Log Set button">
+        </div>
+      </div>
+    </section>
+
+    <!-- PROGRESS SHOWCASE -->
+    <section class="band" id="progress">
+      <div class="band-head">
+        <span class="section-eyebrow">Progress &amp; Insights</span>
+        <h2>See exactly what's working.</h2>
+        <p>Connect Apple Health and Tiqan turns your training into real signal — daily readiness, training load, movement coverage and personal records, all charted from your own data.</p>
+      </div>
+      <div class="showcase">
+        <div class="phone">
+          <img src="screen-progress-a.png" alt="Tiqan Progress — strength level plus Apple Health metrics: resting heart rate, HRV, sleep and active energy">
+        </div>
+        <div class="phone">
+          <img src="screen-progress-b.png" alt="Tiqan Progress — recovery readiness score and the weekly training-load chart">
+        </div>
+      </div>
+    </section>
+
+    <!-- FEATURE: LIBRARY & MUSCLE MAP -->
+    <section class="feature feature--rev">
+      <div class="f-text">
+        <span class="section-eyebrow">Library &amp; Muscle Map</span>
+        <h2>203 exercises, every muscle mapped.</h2>
+        <p class="f-lede">Every movement comes with a demonstration animation, form guidance, and an interactive anatomical map so you can see exactly what you're training — and find your next exercise by tapping a muscle.</p>
+        <ul class="points">
+          <li>203 exercises across push, pull, legs and core — one library for adaptive and custom work</li>
+          <li>Animated demos, target muscles, tempo and step-by-step instructions on every exercise</li>
+          <li>Interactive front / back muscle map on workout cards and exercise sheets</li>
+          <li>Easier and harder neighbours that follow <em>your</em> progression ladder</li>
+        </ul>
+      </div>
+      <div class="f-media" style="--glow: rgba(61,204,121,0.2);">
+        <div class="phone">
+          <img src="screen-library.png" alt="Tiqan exercise library with interactive muscle map" onerror="this.parentNode.innerHTML='&lt;div class=\'shot-ph\'&gt;Muscle map&lt;/div&gt;'">
+        </div>
+      </div>
+    </section>
+
+    <!-- SKILLS -->
+    <section class="band" id="skills">
+      <div class="band-head">
+        <span class="section-eyebrow">Skills</span>
+        <h2>Chase a real skill, one honest step at a time.</h2>
+        <p>Four full progressions take you from the basics to the named movement — and every rung is earned by what you can actually demonstrate.</p>
+      </div>
+      <div class="skills-grid">
+        <div class="skill">
+          <div class="skill-ico">H</div>
+          <h3>Handstand</h3>
+          <p>Balance, alignment, and the freestanding hold.</p>
+        </div>
+        <div class="skill">
+          <div class="skill-ico">M</div>
+          <h3>Muscle-Up</h3>
+          <p>The pull, the transition, and the press-out.</p>
+        </div>
+        <div class="skill">
+          <div class="skill-ico">F</div>
+          <h3>Front Lever</h3>
+          <p>The straight-body horizontal hold.</p>
+        </div>
+        <div class="skill">
+          <div class="skill-ico">P</div>
+          <h3>Planche</h3>
+          <p>The ultimate straight-arm pushing skill.</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- APPLE WATCH -->
+    <section class="band" id="watch">
+      <div class="band-head">
+        <span class="section-eyebrow">Apple Watch<span class="pro-tag">PRO</span></span>
+        <h2>Leave your phone. Not your plan.</h2>
+        <p>Run a full workout from your wrist — no phone needed. Every rep, rest and rating counts exactly like a phone session: it banks clean sessions, moves your levels, and tracks heart rate and calories live.</p>
+      </div>
+      <div class="watch-strip">
+        <div class="watch"><img src="watch-start.png" alt="Apple Watch — today's workout ready to start, with readiness"></div>
+        <div class="watch"><img src="watch-workout.png" alt="Apple Watch — logging reps during a workout"></div>
+        <div class="watch"><img src="watch-rest.png" alt="Apple Watch — rest timer between sets"></div>
+        <div class="watch"><img src="watch-metrics.png" alt="Apple Watch — live heart rate, time and calories"></div>
+        <div class="watch"><img src="watch-summary.png" alt="Apple Watch — workout complete summary"></div>
+        <div class="watch"><img src="watch-face.png" alt="Apple Watch face — Tiqan complication with today's workout"></div>
+      </div>
+    </section>
+
+    <!-- EXTRAS -->
+    <section class="extras">
+      <div class="band-head">
+        <span class="section-eyebrow">Built for the whole ecosystem</span>
+        <h2>Everywhere you train.</h2>
+        <p>Native on every Apple device, and quietly connected across all of them.</p>
+      </div>
+      <div class="egrid">
+        <div class="ecard">
+          <div class="eicon"><svg viewBox="0 0 24 24"><rect x="3" y="5" width="18" height="7" rx="2"/><path d="M6 16h6M6 19h10"/></svg></div>
+          <strong>Live Activities</strong>
+          <p>Your current set, rest timer and next exercise stay on the Lock Screen and in the Dynamic Island — no need to open the app.</p>
+        </div>
+        <div class="ecard">
+          <div class="eicon"><svg viewBox="0 0 24 24"><rect x="3" y="4" width="18" height="14" rx="2"/><path d="M8 20h8M12 18v2M7 9l2 2 3-4"/></svg></div>
+          <strong>Widgets &amp; Siri Shortcuts</strong>
+          <p>Today's workout on your Home Screen, tap to start — or just say “Start my workout in Tiqan.”</p>
+        </div>
+        <div class="ecard">
+          <div class="eicon"><svg viewBox="0 0 24 24"><path d="M18 10h-1.3A8 8 0 1 0 9 20h9a5 5 0 0 0 0-10z"/></svg></div>
+          <strong>iCloud sync</strong>
+          <p>Programs, progress and levels stay in step across iPhone, iPad, Mac and Watch, automatically.</p>
+        </div>
+        <div class="ecard">
+          <div class="eicon"><svg viewBox="0 0 24 24"><path d="M20.8 4.6a5.5 5.5 0 0 0-7.8 0L12 5.7l-1.1-1.1a5.5 5.5 0 0 0-7.8 7.8l1.1 1.1L12 21.2l7.8-7.7 1-1.1a5.5 5.5 0 0 0 0-7.8z"/></svg></div>
+          <strong>Apple Health</strong>
+          <p>Workouts, heart rate and calories sync to Health. Read-once authorization — asked for once, never nagged.</p>
+        </div>
+        <div class="ecard">
+          <div class="eicon"><svg viewBox="0 0 24 24"><rect x="4" y="10" width="16" height="10" rx="2"/><path d="M8 10V7a4 4 0 0 1 8 0v3"/></svg></div>
+          <strong>Private by default</strong>
+          <p>No third-party tracking, no account to create. Your training data stays between you and Apple.</p>
+        </div>
+        <div class="ecard">
+          <div class="eicon"><svg viewBox="0 0 24 24"><path d="M12 3l2.5 7.3H22l-6 4.4 2.3 7.3-6.3-4.5-6.3 4.5L8 14.7 2 10.3h7.5z"/></svg></div>
+          <strong>Native, all the way down</strong>
+          <p>Dynamic Type, VoiceOver, haptics and full light / dark — built with SwiftUI for the platform, not ported to it.</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- FINAL CTA -->
+    <section class="final">
+      <h2>Train smarter. Get stronger.</h2>
+      <p>Answer a few questions and Tiqan builds your plan. Free to start — upgrade to Tiqan Pro when you want every goal, every skill, and the full strength ladder.</p>
+      <a class="appstore" href="https://apps.apple.com/us/app/tiqan/id6761499537" target="_blank" rel="noopener noreferrer" style="display:inline-block;">
+        <img src="appstorebadge.svg" alt="Download on the App Store" style="height:56px;">
+      </a>
+    </section>
+
+    <!-- FOOTER -->
     <footer>
-      <div class="footer-brand">
+      <div class="foot-brand">
         <img src="tiqan-logo.png" alt="">
         <span>© 2026 Lunabit Labs</span>
       </div>
@@ -880,6 +554,8 @@
         <a href="mailto:support@luna.bh">support@luna.bh</a>
         &nbsp;·&nbsp;
         <a href="privacy.html">Privacy Policy</a>
+        &nbsp;·&nbsp;
+        <a href="https://apps.apple.com/us/app/tiqan/id6761499537" target="_blank" rel="noopener noreferrer">App Store</a>
       </div>
     </footer>
   </div>
