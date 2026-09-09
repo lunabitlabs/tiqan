@@ -117,9 +117,9 @@
       display: inline-flex; align-items: center; gap: 7px;
       padding: 8px 15px; border-radius: 999px; font-weight: 600; font-size: 0.9rem;
       color: #fff; background: var(--brand-blue); text-decoration: none;
-      box-shadow: 0 6px 18px rgba(64,112,255,0.4); transition: transform .18s, box-shadow .18s;
+      transition: transform .18s;
     }
-    .nav-cta:hover { transform: translateY(-1px); box-shadow: 0 10px 24px rgba(64,112,255,0.5); }
+    .nav-cta:hover { transform: translateY(-1px); }
     @media (max-width: 720px) { .nav-links a:not(.nav-cta) { display: none; } }
 
     /* ---------- Shared type ---------- */
@@ -137,8 +137,7 @@
 
     /* ---------- Hero (centered, logo-forward) ---------- */
     .hero { display: flex; flex-direction: column; align-items: center; text-align: center; padding: 50px 0 68px; }
-    .hero-mark { width: clamp(120px, 15vw, 176px); height: auto; margin-bottom: 26px;
-      filter: drop-shadow(0 14px 34px rgba(108,107,255,0.42)); }
+    .hero-mark { width: clamp(120px, 15vw, 176px); height: auto; margin-bottom: 26px; }
     .hero .eyebrow { margin-bottom: 22px; }
     .hero h1 { font-family: var(--display); font-size: clamp(2.9rem, 6.4vw, 5rem); line-height: 1.0; letter-spacing: -0.035em; font-weight: 700; margin: 0 0 22px; }
     .hero p.lede { color: var(--muted); font-size: 1.16rem; max-width: 580px; margin: 0 auto 30px; }
