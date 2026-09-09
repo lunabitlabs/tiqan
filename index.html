@@ -191,7 +191,8 @@
     .skills-grid { display: grid; grid-template-columns: repeat(4,1fr); gap: 16px; }
     .skill { padding: 26px 22px; border-radius: var(--radius-sm); background: var(--card); border: 1px solid var(--border); transition: transform .25s, border-color .25s, background .25s; }
     .skill:hover { transform: translateY(-3px); border-color: var(--border-strong); background: var(--elevated); }
-    .skill-ico { width: 44px; height: 44px; border-radius: 13px; display: grid; place-items: center; margin-bottom: 16px; background: var(--brand-sweep); font-family: var(--display); font-weight: 700; font-size: 1.2rem; color: #fff; box-shadow: 0 6px 16px rgba(64,112,255,0.3); }
+    .skill-ico { width: 46px; height: 46px; border-radius: 14px; display: grid; place-items: center; margin-bottom: 16px; background: var(--brand-sweep); color: #fff; box-shadow: 0 6px 16px rgba(64,112,255,0.3); }
+    .skill-ico svg { width: 30px; height: 30px; }
     .skill h3 { font-family: var(--display); font-weight: 700; font-size: 1.12rem; margin: 0 0 7px; letter-spacing: -0.01em; }
     .skill p { margin: 0; color: var(--muted); font-size: 0.9rem; line-height: 1.5; }
     @media (max-width: 900px){ .skills-grid { grid-template-columns: repeat(2,1fr); } }
@@ -326,7 +327,7 @@
       <div class="hero-media">
         <div class="phone-glow"></div>
         <div class="phone phone--tilt">
-          <img src="screen-today.png" alt="Tiqan Today screen — your workout for the day with a readiness score and muscle map">
+          <img src="screen-today.jpg" alt="Tiqan Today screen — your workout for the day with a readiness score and muscle map">
         </div>
       </div>
     </section>
@@ -355,7 +356,7 @@
       </div>
       <div class="f-media" style="--glow: rgba(64,112,255,0.26);">
         <div class="phone">
-          <img src="screen-plan.png" alt="Tiqan adaptive program overview" onerror="this.parentNode.innerHTML='&lt;div class=\'shot-ph\'&gt;Adaptive plan&lt;/div&gt;'">
+          <img src="screen-plan.jpg" alt="Tiqan adaptive program overview" onerror="this.parentNode.innerHTML='&lt;div class=\'shot-ph\'&gt;Adaptive plan&lt;/div&gt;'">
         </div>
       </div>
     </section>
@@ -401,10 +402,10 @@
       </div>
       <div class="f-media duo" style="--glow: rgba(251,113,133,0.22);">
         <div class="phone phone--back">
-          <img src="screen-workout-rate.png" alt="Tiqan rest screen with Form, Tempo and Effort ratings">
+          <img src="screen-workout-rate.jpg" alt="Tiqan rest screen with Form, Tempo and Effort ratings">
         </div>
         <div class="phone phone--front">
-          <img src="screen-workout-active.png" alt="Tiqan active workout screen — exercise demo, reps, and Log Set button">
+          <img src="screen-workout-active.jpg" alt="Tiqan active workout screen — exercise demo, reps, and Log Set button">
         </div>
       </div>
     </section>
@@ -418,10 +419,10 @@
       </div>
       <div class="showcase">
         <div class="phone">
-          <img src="screen-progress-a.png" alt="Tiqan Progress — strength level plus Apple Health metrics: resting heart rate, HRV, sleep and active energy">
+          <img src="screen-progress-a.jpg" alt="Tiqan Progress — strength level plus Apple Health metrics: resting heart rate, HRV, sleep and active energy">
         </div>
         <div class="phone">
-          <img src="screen-progress-b.png" alt="Tiqan Progress — recovery readiness score and the weekly training-load chart">
+          <img src="screen-progress-b.jpg" alt="Tiqan Progress — recovery readiness score and the weekly training-load chart">
         </div>
       </div>
     </section>
@@ -441,7 +442,7 @@
       </div>
       <div class="f-media" style="--glow: rgba(61,204,121,0.2);">
         <div class="phone">
-          <img src="screen-library.png" alt="Tiqan exercise library with interactive muscle map" onerror="this.parentNode.innerHTML='&lt;div class=\'shot-ph\'&gt;Muscle map&lt;/div&gt;'">
+          <img src="screen-library.jpg" alt="Tiqan exercise library with interactive muscle map" onerror="this.parentNode.innerHTML='&lt;div class=\'shot-ph\'&gt;Muscle map&lt;/div&gt;'">
         </div>
       </div>
     </section>
@@ -455,22 +456,22 @@
       </div>
       <div class="skills-grid">
         <div class="skill">
-          <div class="skill-ico">H</div>
+          <div class="skill-ico"><svg viewBox="0 0 100 100" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"><path d="M22,94 L78,94" stroke-width="7"/><path d="M44,88 L46,62" stroke-width="12"/><path d="M46,62 L52,36" stroke-width="15"/><path d="M52,36 L34,10" stroke-width="12"/><path d="M52,36 L74,16" stroke-width="12"/><circle cx="32" cy="64" r="11" fill="currentColor" stroke="none"/></svg></div>
           <h3>Handstand</h3>
           <p>Balance, alignment, and the freestanding hold.</p>
         </div>
         <div class="skill">
-          <div class="skill-ico">M</div>
+          <div class="skill-ico"><svg viewBox="0 0 100 100" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"><path d="M4,58 L34,58" stroke-width="7"/><path d="M66,58 L96,58" stroke-width="7"/><path d="M37,38 L66,58" stroke-width="12"/><path d="M34,30 L46,60" stroke-width="15"/><path d="M46,60 L44,92" stroke-width="12"/><circle cx="32" cy="15" r="11" fill="currentColor" stroke="none"/></svg></div>
           <h3>Muscle-Up</h3>
           <p>The pull, the transition, and the press-out.</p>
         </div>
         <div class="skill">
-          <div class="skill-ico">F</div>
+          <div class="skill-ico"><svg viewBox="0 0 100 100" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"><path d="M34,8 L96,8" stroke-width="7"/><path d="M72,12 L70,46" stroke-width="12"/><path d="M70,46 L36,50" stroke-width="15"/><path d="M36,50 L7,53" stroke-width="12"/><circle cx="85" cy="44" r="11" fill="currentColor" stroke="none"/></svg></div>
           <h3>Front Lever</h3>
           <p>The straight-body horizontal hold.</p>
         </div>
         <div class="skill">
-          <div class="skill-ico">P</div>
+          <div class="skill-ico"><svg viewBox="0 0 100 100" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"><path d="M30,92 L92,92" stroke-width="7"/><path d="M60,86 L70,52" stroke-width="12"/><path d="M70,52 L36,48" stroke-width="15"/><path d="M36,48 L7,44" stroke-width="12"/><circle cx="84" cy="46" r="11" fill="currentColor" stroke="none"/></svg></div>
           <h3>Planche</h3>
           <p>The ultimate straight-arm pushing skill.</p>
         </div>
@@ -482,15 +483,15 @@
       <div class="band-head">
         <span class="section-eyebrow">Apple Watch<span class="pro-tag">PRO</span></span>
         <h2>Leave your phone. Not your plan.</h2>
-        <p>Run a full workout from your wrist — no phone needed. Every rep, rest and rating counts exactly like a phone session: it banks clean sessions, moves your levels, and tracks heart rate and calories live.</p>
+        <p>Build your plan on iPhone, then train from your wrist. The watch runs the whole session on its own — leave the phone in the locker — tracking heart rate and calories live, and every rep, rest and rating syncs back to count exactly like a phone workout: banking clean sessions and moving your levels.</p>
       </div>
       <div class="watch-strip">
-        <div class="watch"><img src="watch-start.png" alt="Apple Watch — today's workout ready to start, with readiness"></div>
-        <div class="watch"><img src="watch-workout.png" alt="Apple Watch — logging reps during a workout"></div>
-        <div class="watch"><img src="watch-rest.png" alt="Apple Watch — rest timer between sets"></div>
-        <div class="watch"><img src="watch-metrics.png" alt="Apple Watch — live heart rate, time and calories"></div>
-        <div class="watch"><img src="watch-summary.png" alt="Apple Watch — workout complete summary"></div>
-        <div class="watch"><img src="watch-face.png" alt="Apple Watch face — Tiqan complication with today's workout"></div>
+        <div class="watch"><img src="watch-start.jpg" alt="Apple Watch — today's workout ready to start, with readiness"></div>
+        <div class="watch"><img src="watch-workout.jpg" alt="Apple Watch — logging reps during a workout"></div>
+        <div class="watch"><img src="watch-rest.jpg" alt="Apple Watch — rest timer between sets"></div>
+        <div class="watch"><img src="watch-metrics.jpg" alt="Apple Watch — live heart rate, time and calories"></div>
+        <div class="watch"><img src="watch-summary.jpg" alt="Apple Watch — workout complete summary"></div>
+        <div class="watch"><img src="watch-face.jpg" alt="Apple Watch face — Tiqan complication with today's workout"></div>
       </div>
     </section>
 
